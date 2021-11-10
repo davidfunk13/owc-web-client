@@ -1,5 +1,7 @@
+import AppRouter from "./components/AppRouter/AppRouter";
 import axios from "./utils/axiosInstance";
 import logo from "./logo.svg";
+import { useAuth0, } from "@auth0/auth0-react";
 import React, { FC, useEffect, } from "react";
 import "./App.css";
 
@@ -9,20 +11,29 @@ async function fuckU() {
 	console.log(shit.data);
 }
 
-interface IAppProps {}
+interface IAppProps { }
 
 const App: FC<IAppProps> = () => {
+	const { isLoading, error, } = useAuth0();
 
 	useEffect(() => {
 		fuckU();
 	}, []);
+
+	if (error) {
+		return <div>Oops... {error.message}</div>;
+	}
+
+	if (isLoading) {
+		return <p>LOADING....</p>;
+	}
 	
 	return (
 		<div className={"App"}>
 			<header className={"App-header"}>
 				<img src={logo} className={"App-logo"} alt={"logo"} />
 				<p>
-          Edit <code>src/App.tsx</code> and save to reload.
+					Edit <code>src/App.tsx</code> and save to reload.
 				</p>
 				<a
 					className={"App-link"}
@@ -30,9 +41,10 @@ const App: FC<IAppProps> = () => {
 					target={"_blank"}
 					rel={"noopener noreferrer"}
 				>
-          Learn React
+					Learn React
 				</a>
 			</header>
+			<AppRouter/>
 		</div>
 	);
 };
