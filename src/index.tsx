@@ -20,6 +20,15 @@ const providerConfig = {
 	onRedirectCallback,
 };
 
+console.log({
+	config: {
+		domain:      process.env.REACT_APP_DOMAIN as string,
+		clientId:    process.env.REACT_APP_CLIENT_ID as string,
+		audience:    process.env.REACT_APP_AUDIENCE as string,
+		redirectUri: window.location.origin,
+	},
+});
+
 ReactDOM.render(
 	<React.StrictMode>
 		<Auth0Provider {...providerConfig}>
