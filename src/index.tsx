@@ -21,7 +21,6 @@ const providerConfig = {
 };
 
 ReactDOM.render(
-	
 	<React.StrictMode>
 		<Auth0Provider {...providerConfig}>
 			<App />

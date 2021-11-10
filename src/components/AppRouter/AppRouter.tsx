@@ -1,4 +1,5 @@
 import React from "react";
+import TestPage from "../../views/TestPage/TestPage";
 import { BrowserRouter, Link, Outlet, Route, Routes, } from "react-router-dom";
 
 const AppRouter = () => {
@@ -9,6 +10,7 @@ const AppRouter = () => {
 					<Route index element={<Home />} />
 					<Route path={"about"} element={<About />} />
 					<Route path={"dashboard"} element={<Dashboard />} />
+					<Route path={"protected"} element={<TestPage />} />
 
 					{/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit

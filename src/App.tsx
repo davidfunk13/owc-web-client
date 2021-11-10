@@ -14,7 +14,9 @@ async function fuckU() {
 interface IAppProps { }
 
 const App: FC<IAppProps> = () => {
-	const { isLoading, error, } = useAuth0();
+	const { isLoading, error, isAuthenticated, loginWithRedirect, logout, } = useAuth0();
+
+	const logoutWithRedirect = () => logout({ returnTo: window.location.origin, });
 
 	useEffect(() => {
 		fuckU();
@@ -43,6 +45,11 @@ const App: FC<IAppProps> = () => {
 				>
 					Learn React
 				</a>
+				{!isAuthenticated ?
+					<button onClick={() => loginWithRedirect()}>Login</button>
+					:
+					<button onClick={() => logoutWithRedirect()}>Logout</button>
+				}
 			</header>
 			<AppRouter/>
 		</div>
