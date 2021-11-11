@@ -5,27 +5,37 @@
   "proxy": "http://localhost:3001",
   "dependencies": {
     "@auth0/auth0-react": "^1.8.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
+    "@chakra-ui/icons": "^1.0.17",
+    "@chakra-ui/react": "^1.0.0",
+    "@emotion/react": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
+    "@reduxjs/toolkit": "^1.6.2",
+    "@testing-library/jest-dom": "^5.9.0",
+    "@testing-library/react": "^10.2.1",
+    "@testing-library/user-event": "^12.0.2",
+    "@types/jest": "^25.0.0",
     "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
     "axios": "^0.24.0",
+    "framer-motion": "^4.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "6",
+    "react-icons": "^3.0.0",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "typescript": "^3.9.5",
+    "web-vitals": "^0.2.2"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -38,175 +48,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "eslintConfig": {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "react-app",
-      "react-app/jest",
-      "plugin:react/recommended",
-      "plugin:@typescript-eslint/recommended"
-    ],
-    "rules": {
-      "react-hooks/rules-of-hooks": "error",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "react-hooks/exhaustive-deps": "warn",
-      "react/prop-types": "off",
-      "react/react-in-jsx-scope": "off",
-      "keyword-spacing": "error",
-      "arrow-spacing": "error",
-      "react/jsx-curly-brace-presence": [
-        "error",
-        {
-          "props": "always",
-          "children": "never"
-        }
-      ],
-      "sort-imports": [
-        "error",
-        {
-          "memberSyntaxSortOrder": [
-            "all",
-            "single",
-            "multiple",
-            "none"
-          ]
-        }
-      ],
-      "padding-line-between-statements": [
-        "error",
-        {
-          "blankLine": "always",
-          "prev": [
-            "const",
-            "let",
-            "var",
-            "function",
-            "expression"
-          ],
-          "next": "*"
-        },
-        {
-          "blankLine": "always",
-          "prev": [
-            "const",
-            "let",
-            "var"
-          ],
-          "next": [
-            "const",
-            "let",
-            "var"
-          ]
-        }
-      ],
-      "array-bracket-spacing": [
-        "error",
-        "always"
-      ],
-      "array-bracket-newline": [
-        "error",
-        {
-          "multiline": true
-        }
-      ],
-      "@typescript-eslint/no-empty-interface": "off",
-      "@typescript-eslint/no-explicit-any": "warn",
-      "object-curly-newline": [
-        "error",
-        {
-          "multiline": true
-        }
-      ],
-      "newline-before-return": "error",
-      "object-property-newline": [
-        "error",
-        {
-          "allowAllPropertiesOnSameLine": false
-        }
-      ],
-      "object-curly-spacing": [
-        "error",
-        "always"
-      ],
-      "array-element-newline": [
-        "error",
-        {
-          "multiline": true,
-          "minItems": 5
-        }
-      ],
-      "quotes": [
-        "error",
-        "double",
-        {
-          "allowTemplateLiterals": true
-        }
-      ],
-      "key-spacing": [
-        "error",
-        {
-          "align": "value",
-          "mode": "strict"
-        }
-      ],
-      "indent": [
-        "error",
-        "tab"
-      ],
-      "no-multi-spaces": [
-        "error",
-        {
-          "exceptions": {
-            "Property": true
-          }
-        }
-      ],
-      "prefer-const": [
-        "error",
-        {
-          "destructuring": "any",
-          "ignoreReadBeforeAssign": false
-        }
-      ],
-      "comma-dangle": [
-        "error",
-        {
-          "arrays": "always",
-          "objects": "always",
-          "imports": "always",
-          "exports": "always",
-          "functions": "never"
-        }
-      ],
-      "semi": [
-        "error",
-        "always"
-      ],
-      "no-multiple-empty-lines": [
-        "error",
-        {
-          "max": 1
-        }
-      ],
-      "implicit-arrow-linebreak": [
-        "error",
-        "beside"
-      ],
-      "eol-last": [
-        "error",
-        "always"
-      ],
-      "jsx-quotes": [
-        "error",
-        "prefer-double"
-      ]
-    }
   }
 }

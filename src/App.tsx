@@ -1,59 +1,61 @@
-import AppRouter from "./components/AppRouter/AppRouter";
-import axios from "./utils/axiosInstance";
-import logo from "./logo.svg";
-import { useAuth0, } from "@auth0/auth0-react";
-import React, { FC, useEffect, } from "react";
-import "./App.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import * as React from "react"
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import AppMain from "./components/AppMain/AppMain";
+import TestPage from "./views/TestPage/TestPage";
 
-async function fuckU() {
-	const shit = await axios.get("/open");
 
-	console.log(shit.data);
+
+export const App = () => {
+	const { isAuthenticated } = useAuth0();
+	console.log(isAuthenticated)
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={"/"} element={<AppMain/>}>
+          <Route index element={<Home />} />
+          <Route path={"about"} element={<About />} />
+          <Route path={"dashboard"} element={<Dashboard />} />
+          <Route path={"protected"} element={<TestPage />} />
+          <Route path={"*"} element={<NoMatch />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-interface IAppProps { }
-
-const App: FC<IAppProps> = () => {
-	const { isLoading, error, isAuthenticated, loginWithRedirect, logout, } = useAuth0();
-
-	const logoutWithRedirect = () => logout({ returnTo: window.location.origin, });
-
-	useEffect(() => {
-		fuckU();
-	}, []);
-
-	if (error) {
-		return <div>Oops... {error.message}</div>;
-	}
-
-	if (isLoading) {
-		return <p>LOADING....</p>;
-	}
-	
+function Home() {
 	return (
-		<div className={"App"}>
-			<header className={"App-header"}>
-				<img src={logo} className={"App-logo"} alt={"logo"} />
-				<p>
-					Edit <code>src/App.tsx</code> and save to reload.
-				</p>
-				<a
-					className={"App-link"}
-					href={"https://reactjs.org"}
-					target={"_blank"}
-					rel={"noopener noreferrer"}
-				>
-					Learn React
-				</a>
-				{!isAuthenticated ?
-					<button onClick={() => loginWithRedirect()}>Login</button>
-					:
-					<button onClick={() => logoutWithRedirect()}>Logout</button>
-				}
-			</header>
-			<AppRouter/>
+		<div>
+			<h2>Home</h2>
 		</div>
 	);
-};
+}
 
-export default App;
+function About() {
+	return (
+		<div>
+			<h2>About</h2>
+		</div>
+	);
+}
+
+function Dashboard() {
+	return (
+		<div>
+			<h2>Dashboard</h2>
+		</div>
+	);
+}
+
+function NoMatch() {
+	return (
+		<div>
+			<h2>Nothing to see here!</h2>
+			<p>
+				<Link to={"/"}>Go to the home page</Link>
+			</p>
+		</div>
+	);
+}
+
