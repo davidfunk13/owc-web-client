@@ -1,41 +1,42 @@
-import instance from "../../utils/axiosInstance";
+import ApiError from "../../models/ApiError";
+import ApiResponse from "../../models/ApiResponse";
+import AppLoading from "../AppLoading/AppLoading";
+import { Button, } from "@chakra-ui/button";
+import { FC, } from "react";
+import axios from "../../utils/axiosInstance";
+import { Heading, Text, } from "@chakra-ui/layout";
 import React, { useState, } from "react";
 import { useAuth0, withAuthenticationRequired, } from "@auth0/auth0-react";
-import { Heading, Text } from "@chakra-ui/layout";
-import { Button } from "@chakra-ui/button";
-import AppLoading from "../AppLoading/AppLoading";
 
-const TestPage = () => {
+interface ITestPageProps{}
 
-	const [state, setState,] = useState({
+const TestPage: FC<ITestPageProps> = (): JSX.Element => {
+
+	const [ state, setState, ] = useState({
 		showResult: false,
 		apiMessage: "",
-		error: null,
+		error:      "",
 	});
 
-	const {
-		getAccessTokenSilently,
-		// loginWithPopup,
-		// getAccessTokenWithPopup,
-	} = useAuth0();
+	const { getAccessTokenSilently, } = useAuth0();
 
 	const callApi = async () => {
 		try {
 			const token = await getAccessTokenSilently();
 
-			const response = await instance.get("/protected",
+			const response = await axios.get("/protected",
 				{ headers: { Authorization: `Bearer ${token}`, }, })
 				.then(data => data).catch(err => console.log({ err, }));
 
 			setState({
 				...state,
 				showResult: true,
-				apiMessage: (response as any).data,
+				apiMessage: (response as ApiResponse).data as string,
 			});
 		} catch (error) {
 			setState({
 				...state,
-				error: (error as any).error,
+				error: (error as ApiError).error,
 			});
 		}
 	};
@@ -55,4 +56,4 @@ const TestPage = () => {
 	);
 };
 
-export default withAuthenticationRequired(TestPage, { onRedirecting: () => <AppLoading />, });
+export default withAuthenticationRequired(TestPage, { onRedirecting: () => <AppLoading/> as JSX.Element, });
