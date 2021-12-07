@@ -7,7 +7,7 @@ const Home: FC = () => {
 
 	return (
 		<Box textAlign={"center"} fontSize={"xl"}>
-		
+			Home
 		</Box>
 	);
 };

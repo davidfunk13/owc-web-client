@@ -1,59 +1,48 @@
-import ApiError from "../../models/ApiError";
-import ApiResponse from "../../models/ApiResponse";
 import AppLoading from "../AppLoading/AppLoading";
 import { Button, } from "@chakra-ui/button";
 import { FC, } from "react";
-import axios from "../../utils/axiosInstance";
+import GetAccessTokenSilently from "../../models/GetAccessTokenSilently";
+import React from "react";
+import testThunk from "../../redux/thunks/testThunk/testThunk";
+import { AppDispatch, useAppDispatch, useAppSelector, } from "../../redux/store";
 import { Heading, Text, } from "@chakra-ui/layout";
-import React, { useState, } from "react";
+import { selectLoading, selectMessage, setToken, } from "../../redux/reducers/auth/authSlice";
 import { useAuth0, withAuthenticationRequired, } from "@auth0/auth0-react";
 
-interface ITestPageProps{}
+interface ITestPageProps { }
+
+export const callApi = async (dispatch: AppDispatch ) => {
+	// const token = await getToken();
+
+	// dispatch(setToken(token));
+
+	dispatch(testThunk());
+};
 
 const TestPage: FC<ITestPageProps> = (): JSX.Element => {
 
-	const [ state, setState, ] = useState({
-		showResult: false,
-		apiMessage: "",
-		error:      "",
-	});
+	const dispatch = useAppDispatch();
+
+	const message = useAppSelector(selectMessage);
+
+	const loading = useAppSelector(selectLoading);
 
 	const { getAccessTokenSilently, } = useAuth0();
-
-	const callApi = async () => {
-		try {
-			const token = await getAccessTokenSilently();
-
-			const response = await axios.get("/protected",
-				{ headers: { Authorization: `Bearer ${token}`, }, })
-				.then(data => data).catch(err => console.log({ err, }));
-
-			setState({
-				...state,
-				showResult: true,
-				apiMessage: (response as ApiResponse).data as string,
-			});
-		} catch (error) {
-			setState({
-				...state,
-				error: (error as ApiError).error,
-			});
-		}
-	};
 
 	return (
 		<>
 			<Heading>Result</Heading>
-			{state.showResult && (
+			{loading && <AppLoading/>}
+			{message && (
 				<div data-testid={"api-result"}>
-					<Text>{JSON.stringify(state.apiMessage, null, 2)}</Text>
+					<Text>{message}</Text>
 				</div>
 			)}
-			<Button onClick={callApi}>
+			<Button onClick={() => callApi(dispatch)}>
 				Ping API
 			</Button>
 		</>
 	);
 };
 
-export default withAuthenticationRequired(TestPage, { onRedirecting: () => <AppLoading/> as JSX.Element, });
+export default withAuthenticationRequired(TestPage, { onRedirecting: () => <AppLoading /> as JSX.Element, });
