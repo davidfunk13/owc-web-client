@@ -1,30 +1,29 @@
-import { Auth0Provider, useAuth0 } from "@auth0/auth0-react"
-import { ColorModeScript, ChakraProvider, theme } from "@chakra-ui/react"
-import * as React from "react"
-import ReactDOM from "react-dom"
-import { App } from "./App"
-import reportWebVitals from "./reportWebVitals"
-import * as serviceWorker from "./serviceWorker"
-import history from "./utils/history"
+import * as React from "react";
+import * as serviceWorker from "./serviceWorker";
+import { App, } from "./App";
 import { Provider, } from "react-redux";
+import ReactDOM from "react-dom";
+import history from "./utils/history";
+import reportWebVitals from "./reportWebVitals";
 import { store, } from "./redux/store";
+import { AppState, Auth0Provider, Auth0ProviderOptions, } from "@auth0/auth0-react";
+import { ChakraProvider, ColorModeScript, theme, } from "@chakra-ui/react";
 
-const onRedirectCallback = (appState: any) => {
+const onRedirectCallback = (appState: AppState) => {
 	history.push(
 		appState && appState.returnTo ? appState.returnTo : window.location.pathname
 	);
 };
 
-const providerConfig = {
-	domain: process.env.REACT_APP_DOMAIN as string,
-	clientId: process.env.REACT_APP_CLIENT_ID as string,
-	audience: process.env.REACT_APP_AUDIENCE as string,
-	redirectUri: window.location.origin,
-	cacheLocation:"localstorage" as any,
+const providerConfig: Auth0ProviderOptions = {
+	domain:           process.env.REACT_APP_DOMAIN ?? "",
+	clientId:         process.env.REACT_APP_CLIENT_ID ?? "",
+	audience:         process.env.REACT_APP_AUDIENCE,
+	redirectUri:      window.location.origin,
+	cacheLocation:    "localstorage",
 	useRefreshTokens: true,
 	onRedirectCallback,
 };
-
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -37,15 +36,15 @@ ReactDOM.render(
 			</Provider>
 		</Auth0Provider>
 	</React.StrictMode>,
-	document.getElementById("root"),
-)
+	document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorker.unregister()
+serviceWorker.unregister();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals()
+reportWebVitals();

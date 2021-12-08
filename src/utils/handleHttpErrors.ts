@@ -1,21 +1,16 @@
-function handleHttpErrors(status: number, reject: (value: unknown) => void) {
+function handleHttpErrors(status: number) {
 	switch (status) {
 	case 401:
 		console.log("hit 401");
 
-		reject("Unauthorized. Please log in to access this resource.");
+		return "Unauthorized. Please log in to access this resource.";
 
-		return;
 	case 404:
 		console.log("hit");
 
-		reject("Resource not found");
-
-		return;
+		return "Resource not found";
 	default:
-		reject("Something went wrong handling the Http Status Error");
-
-		break;
+		return "Something went wrong handling the Http Status Error";
 	}
 }
 

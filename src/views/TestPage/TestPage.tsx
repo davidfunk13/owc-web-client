@@ -6,21 +6,19 @@ import React from "react";
 import testThunk from "../../redux/thunks/testThunk/testThunk";
 import { AppDispatch, useAppDispatch, useAppSelector, } from "../../redux/store";
 import { Heading, Text, } from "@chakra-ui/layout";
-import { selectLoading, selectMessage, setToken, } from "../../redux/reducers/auth/authSlice";
+import { selectLoading, selectMessage, } from "../../redux/reducers/battletag/battletagSlice";
 import { useAuth0, withAuthenticationRequired, } from "@auth0/auth0-react";
 
 interface ITestPageProps { }
 
-export const callApi = async (dispatch: AppDispatch ) => {
-	// const token = await getToken();
+export const callApi = async (dispatch: AppDispatch, getToken: ()=> Promise<string> ) => {
+	const token = await getToken();
 
-	// dispatch(setToken(token));
-
-	dispatch(testThunk());
+	dispatch(testThunk(token));
 };
 
 const TestPage: FC<ITestPageProps> = (): JSX.Element => {
-
+	
 	const dispatch = useAppDispatch();
 
 	const message = useAppSelector(selectMessage);
@@ -28,7 +26,7 @@ const TestPage: FC<ITestPageProps> = (): JSX.Element => {
 	const loading = useAppSelector(selectLoading);
 
 	const { getAccessTokenSilently, } = useAuth0();
-
+	
 	return (
 		<>
 			<Heading>Result</Heading>
@@ -38,7 +36,7 @@ const TestPage: FC<ITestPageProps> = (): JSX.Element => {
 					<Text>{message}</Text>
 				</div>
 			)}
-			<Button onClick={() => callApi(dispatch)}>
+			<Button onClick={() => callApi(dispatch, getAccessTokenSilently)}>
 				Ping API
 			</Button>
 		</>
