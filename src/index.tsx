@@ -1,11 +1,10 @@
 import * as React from "react";
 import * as serviceWorker from "./serviceWorker";
+import ApolloWrapper from "./components/ApolloWrapper/ApolloWrapper";
 import { App, } from "./App";
-import { Provider, } from "react-redux";
 import ReactDOM from "react-dom";
 import history from "./utils/history";
 import reportWebVitals from "./reportWebVitals";
-import { store, } from "./redux/store";
 import { AppState, Auth0Provider, Auth0ProviderOptions, } from "@auth0/auth0-react";
 import { ChakraProvider, ColorModeScript, theme, } from "@chakra-ui/react";
 
@@ -28,12 +27,12 @@ const providerConfig: Auth0ProviderOptions = {
 ReactDOM.render(
 	<React.StrictMode>
 		<Auth0Provider {...providerConfig}>
-			<Provider store={store}>
+			<ApolloWrapper>
 				<ColorModeScript />
 				<ChakraProvider theme={theme}>
 					<App />
 				</ChakraProvider>
-			</Provider>
+			</ApolloWrapper>
 		</Auth0Provider>
 	</React.StrictMode>,
 	document.getElementById("root")

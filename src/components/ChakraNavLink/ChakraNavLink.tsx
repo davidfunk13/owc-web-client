@@ -1,7 +1,5 @@
 import { Link, } from "@chakra-ui/layout";
 import { NavLink, } from "react-router-dom";
-import { setOpen, } from "../../redux/reducers/drawer/drawerSlice";
-import { useAppDispatch, } from "../../redux/store";
 import { useColorModeValue, } from "@chakra-ui/color-mode";
 import React, { FC, ReactNode, } from "react";
 
@@ -16,8 +14,6 @@ const ChakraNavLink: FC<IChakraNavLinkProps> = ({ to, children, }: IChakraNavLin
 		bg:             useColorModeValue("gray.200", "gray.700"),
 	};
 
-	const dispatch = useAppDispatch();
-
 	return (
 		<Link as={NavLink}
 			px={8}
@@ -25,7 +21,7 @@ const ChakraNavLink: FC<IChakraNavLinkProps> = ({ to, children, }: IChakraNavLin
 			rounded={"md"}
 			_hover={hoverStyles}
 			to={to}
-			onClick={() => dispatch(setOpen(false))}
+			onClick={() => console.log("eat my butt")}
 		>
 			{children}
 		</Link>
