@@ -1,14 +1,11 @@
 import * as React from "react";
 import AppMain from "./components/AppMain/AppMain";
+import Home from "./views/Home/Home";
 import TestPage from "./views/TestPage/TestPage";
-import { useAuth0, } from "@auth0/auth0-react";
 import { BrowserRouter, Link, Route, Routes, } from "react-router-dom";
 
 export const App = () => {
-	const { isAuthenticated, } = useAuth0();
 
-	console.log(isAuthenticated);
-	
 	return (
 		<BrowserRouter>
 			<Routes>
@@ -23,14 +20,6 @@ export const App = () => {
 		</BrowserRouter>
 	);
 };
-
-function Home() {
-	return (
-		<div>
-			<h2>Home</h2>
-		</div>
-	);
-}
 
 function About() {
 	return (

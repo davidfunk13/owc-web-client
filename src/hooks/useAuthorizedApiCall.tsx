@@ -4,10 +4,10 @@ import { useEffect, useState, } from "react";
 
 interface IUseAuthorizedApiProps {
     route: string
-    body?: any | unknown
+    body?: unknown
 }
 
-const useAuthorizedApi = ({ route, body, }:IUseAuthorizedApiProps) => {
+const useAuthorizedApi = ({ route, body, }: IUseAuthorizedApiProps) => {
 	const [ data, setData, ] = useState<any>(undefined);
 
 	const { getAccessTokenSilently, } = useAuth0();
@@ -31,7 +31,7 @@ const useAuthorizedApi = ({ route, body, }:IUseAuthorizedApiProps) => {
 			});
 	}
 
-	async function apiPost(body: any) {
+	async function apiPost(body: unknown) {
 		//token caches ITSELF AND RECALLS AUTOMATICALLY IF IT IS CACHED. IT BELONGS ON EVERY API CALL, WEIRD I KNOW.
 		const token = await getAccessTokenSilently();
        
