@@ -7,9 +7,9 @@ import {
   Code,
   Grid,
 } from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
-import { useGetPokemonByNameQuery } from "./redux/services/pokemon/pokemon"
+import { ColorModeSwitcher } from "../ColorModeSwitcher"
+import { Logo } from "../Logo"
+import { useGetPokemonByNameQuery } from "./services/pokemon/pokemon"
 
 export const App = () => {
   const { data, error, isLoading } = useGetPokemonByNameQuery('bulbasaur')
@@ -19,7 +19,6 @@ export const App = () => {
   return (
     <Box textAlign="center" fontSize="xl">
       <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
         <VStack spacing={8}>
           <Logo h="40vmin" pointerEvents="none" />
           <Text>

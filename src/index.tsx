@@ -1,12 +1,13 @@
 import { ColorModeScript } from "@chakra-ui/react"
 import * as React from "react";
-import { App } from "./App";
+import { App } from "./app/App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
-import { store } from "./redux/store/store"
+import { store } from "./app/store"
 import { ChakraProvider, theme } from "@chakra-ui/react";
 import { createRoot } from 'react-dom/client';
+import Navbar from "./components/Navbar/Navbar";
 
 const container = document.getElementById("root");
 
@@ -21,6 +22,7 @@ root.render(
     <ColorModeScript />
     <Provider store={store}>
       <ChakraProvider theme={theme}>
+        <Navbar/>
         <App />
       </ChakraProvider>
     </Provider>
