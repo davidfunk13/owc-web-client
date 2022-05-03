@@ -1,21 +1,15 @@
-import * as React from "react"
 import {
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-} from "@chakra-ui/react"
-import { ColorModeSwitcher } from "../ColorModeSwitcher"
-import { Logo } from "../Logo"
-import { useGetPokemonByNameQuery } from "./services/pokemon/pokemon"
+  Box, Code, Grid, Link, Text, VStack
+} from "@chakra-ui/react";
+import React, { FC } from "react";
+import RTKTest from "../components/RTKTest";
+import { Logo } from "../Logo";
 
-export const App = () => {
-  const { data, error, isLoading } = useGetPokemonByNameQuery('bulbasaur')
+interface IAppProps {
 
-  console.log({ data, error, isLoading })
+}
 
+const App: FC<IAppProps> = () => {
   return (
     <Box textAlign="center" fontSize="xl">
       <Grid minH="100vh" p={3}>
@@ -24,10 +18,6 @@ export const App = () => {
           <Text>
             Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
           </Text>
-          <Text>
-            {data?.name}
-          </Text>
-          {data?.stats?.map((item, i) => <Text key={`${item.stat.name}-${i}`}>{item.stat.name}</Text>)}
           <Link
             color="teal.500"
             href="https://chakra-ui.com"
@@ -38,7 +28,11 @@ export const App = () => {
             Learn Chakra
           </Link>
         </VStack>
+        <RTKTest/>
       </Grid>
     </Box>
+
   )
 }
+
+export default App

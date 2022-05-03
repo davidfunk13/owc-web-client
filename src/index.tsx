@@ -1,33 +1,25 @@
-import { ColorModeScript } from "@chakra-ui/react"
-import * as React from "react";
-import { App } from "./app/App";
-import reportWebVitals from "./reportWebVitals";
-import * as serviceWorker from "./serviceWorker";
-import { Provider } from "react-redux";
+import { ChakraProvider, ColorModeScript, theme } from "@chakra-ui/react"
+import * as React from "react"
+import ReactDOM from "react-dom"
+import { Provider } from "react-redux"
+import App from "./app/App"
 import { store } from "./app/store"
-import { ChakraProvider, theme } from "@chakra-ui/react";
-import { createRoot } from 'react-dom/client';
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/Navbar/Navbar"
+import reportWebVitals from "./reportWebVitals"
+import * as serviceWorker from "./serviceWorker"
 
-const container = document.getElementById("root");
-
-if (!container) {
-  throw new Error("There was a problem mounting the application.")
-}
-
-const root = createRoot(container);
-
-root.render(
-  <React.StrictMode >
+ReactDOM.render(
+  <React.StrictMode>
     <ColorModeScript />
     <Provider store={store}>
       <ChakraProvider theme={theme}>
-        <Navbar/>
+        <Navbar />
         <App />
       </ChakraProvider>
     </Provider>
-  </React.StrictMode >
-);
+  </React.StrictMode>,
+  document.getElementById("root"),
+)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
