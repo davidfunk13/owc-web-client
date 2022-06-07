@@ -2,12 +2,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import drawerReducer from '../features/drawer/drawerSlice';
 import snackbarReducer from '../features/snackbar/snackbarSlice';
+import uiReducer from '../features/ui/uiSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     drawer: drawerReducer,
-    snackbar: snackbarReducer
+    snackbar: snackbarReducer,
+    ui: uiReducer
   },
 });
 

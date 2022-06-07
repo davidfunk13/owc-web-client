@@ -12,7 +12,11 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useState } from 'react';
-import { NavigationOutlined } from '@mui/icons-material';
+import { Brightness5, NavigationOutlined } from '@mui/icons-material';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectDark, setDark } from '../../ui/uiSlice';
+import { Icon } from '@mui/material';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -20,6 +24,8 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const NavBar = () => {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const isDark = useAppSelector(selectDark);
+    const dispatch = useAppDispatch()
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -40,9 +46,9 @@ const NavBar = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                {/* <IconButton> */}
+                    {/* <IconButton> */}
                     <NavigationOutlined />
-s                {/* </IconButton> */}
+                    {/* </IconButton> */}
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant="h6"
@@ -151,6 +157,16 @@ s                {/* </IconButton> */}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
+                            <MenuItem onClick={() => dispatch(setDark(!isDark))}>
+                                <Typography textAlign="center">Theme: {isDark ?
+                                    <Icon>
+                                        <DarkModeIcon style={{fontSize: "1rem"}}/>
+                                    </Icon>
+                                    : <Icon>
+                                        <Brightness5 style={{fontSize: "1rem"}}/>
+                                    </Icon>}
+                                </Typography>
+                            </MenuItem>
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                     <Typography textAlign="center">{setting}</Typography>
