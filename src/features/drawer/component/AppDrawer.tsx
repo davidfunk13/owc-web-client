@@ -1,22 +1,15 @@
-import { useTheme } from "@emotion/react";
 import { ChevronLeft, ChevronRight, Inbox, Mail } from "@mui/icons-material";
 import { Divider, Drawer as MuiDrawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 // import DrawerHeader from "@mui/material"
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { openDrawer, selectDrawerOpen } from "../drawerSlice";
-import { theme } from "../../../theme";
-const drawerStyle = {
-  width: 240,
-  flexShrink: 0,
-  '& .MuiDrawer-paper': {
-    width: 240,
-    boxSizing: 'border-box',
-  },
-}
+import { theme } from "../../../theme/theme";
+import useStyles from "./AppDrawer.styles";
 
-const Drawer = () => {
+const AppDrawer = () => {
   const dispatch = useAppDispatch();
   const drawerOpen = useAppSelector(selectDrawerOpen);
+  const { classes, cx } = useStyles();
 
   const handleDrawerClose = () => {
     dispatch(openDrawer(false));
@@ -24,9 +17,9 @@ const Drawer = () => {
 
   return (
     <MuiDrawer
-      sx={drawerStyle}
-      variant="persistent"
-      anchor="left"
+      className={classes.drawerStyle}
+      variant={"persistent"}
+      anchor={"left"}
       open={drawerOpen}
     >
       <>
@@ -66,4 +59,4 @@ const Drawer = () => {
   );
 
 }
-export default Drawer
+export default AppDrawer

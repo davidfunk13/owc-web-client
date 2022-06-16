@@ -5,7 +5,7 @@ import { selectSnackbarMessage, selectSnackbarVariant, openSnackbar } from "./fe
 import NavBar from "./features/navbar/component/NavBar"
 import ViewLayout from "./layouts/ViewLayout/ViewLayout";
 import { ThemeProvider } from '@mui/material/styles';
-import { theme, darkTheme } from './theme'
+import { theme, darkTheme } from './theme/theme'
 import { selectDark} from "./features/ui/uiSlice";
 interface AppProps { }
 

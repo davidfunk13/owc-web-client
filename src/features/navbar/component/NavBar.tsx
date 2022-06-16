@@ -17,19 +17,27 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { selectDark, setDark } from '../../ui/uiSlice';
 import { Icon } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { openDrawer, selectDrawerOpen } from '../../drawer/drawerSlice';
+import { classnames } from 'tss-react/tools/classnames';
+import useStyles from './NavBar.styles';
+import AppDrawer from '../../drawer/component/AppDrawer';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const NavBar = () => {
+    const dispatch = useAppDispatch();
+    const drawerOpen = useAppSelector(selectDrawerOpen);
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const isDark = useAppSelector(selectDark);
-    const dispatch = useAppDispatch()
+    const { classes, cx } = useStyles();
 
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
+    const toggleDrawer = (event: React.MouseEvent<HTMLElement>) => {
+      dispatch(openDrawer(!drawerOpen));
+      setAnchorElNav(event.currentTarget);
     };
+
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
@@ -46,40 +54,31 @@ const NavBar = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    {/* <IconButton> */}
                     <NavigationOutlined />
-                    {/* </IconButton> */}
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <AdbIcon className={classes.icon} />
                     <Typography
                         variant="h6"
                         noWrap
                         component="a"
                         href="/"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
+                        className={classes.textHeading}
                     >
-                        LOGO
+                        Overwatch Companion
                     </Typography>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <Box className={classes.hamburgerMenu}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
+                            onClick={toggleDrawer}
                             color="inherit"
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Menu
+                    <AppDrawer/>
+                        {/* <Menu
                             id="menu-appbar"
                             anchorEl={anchorElNav}
                             anchorOrigin={{
@@ -102,7 +101,7 @@ const NavBar = () => {
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
-                        </Menu>
+                        </Menu> */}
                     </Box>
                     <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
@@ -121,7 +120,7 @@ const NavBar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        Overwatch Companion
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
