@@ -1,62 +1,48 @@
-import { ChevronLeft, ChevronRight, Inbox, Mail } from "@mui/icons-material";
-import { Divider, Drawer as MuiDrawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-// import DrawerHeader from "@mui/material"
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { openDrawer, selectDrawerOpen } from "../drawerSlice";
-import { theme } from "../../../theme/theme";
-import useStyles from "./AppDrawer.styles";
+import { Divider, Drawer, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import { FC, useState } from "react";
 
-const AppDrawer = () => {
-  const dispatch = useAppDispatch();
-  const drawerOpen = useAppSelector(selectDrawerOpen);
-  const { classes, cx } = useStyles();
+const navItems = ['Home', 'About', 'Contact'];
 
-  const handleDrawerClose = () => {
-    dispatch(openDrawer(false));
-  };
+interface AppDrawerProps { }
+
+const AppDrawer: FC<AppDrawerProps> = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const drawerWidth = 240;
+
+  const handleDrawerToggle = () => setMobileOpen(!mobileOpen)
 
   return (
-    <MuiDrawer
-      className={classes.drawerStyle}
-      variant={"persistent"}
-      anchor={"left"}
-      open={drawerOpen}
+    <Drawer
+      variant="temporary"
+      open={mobileOpen}
+      onClose={handleDrawerToggle}
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile.
+      }}
+      sx={{
+        display: { xs: 'block', sm: 'none' },
+        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+      }}
     >
-      <>
-        <IconButton onClick={handleDrawerClose}>
-          {theme.direction === 'ltr' ? <ChevronLeft /> : <ChevronRight />}
-         <ChevronLeft /> 
-        
-        </IconButton>
-      </>
-      <Divider />
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <Inbox /> : <Mail />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <Inbox /> : <Mail />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </MuiDrawer>
-  );
 
+      <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }} >
+        <Typography variant="h6" sx={{ my: 2 }}>
+          MUI
+        </Typography>
+        <Divider />
+        <List>
+          {navItems.map((item) => (
+            <ListItem key={item} disablePadding>
+              <ListItemButton sx={{ textAlign: 'center' }}>
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Box >
+    </Drawer>
+  );
 }
-export default AppDrawer
+
+export default AppDrawer;

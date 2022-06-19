@@ -1,139 +1,61 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import { AppBar, Avatar, Button, Divider, Drawer, Icon, IconButton, List, ListItem, ListItemButton, ListItemText, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material'
+import { Box } from '@mui/system'
+import React, { useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { useState } from 'react';
 import { Brightness5, NavigationOutlined } from '@mui/icons-material';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { selectDark, setDark } from '../../ui/uiSlice';
-import { Icon } from '@mui/material';
+
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { openDrawer, selectDrawerOpen } from '../../drawer/drawerSlice';
-import { classnames } from 'tss-react/tools/classnames';
-import useStyles from './NavBar.styles';
+import { selectDark, setDark } from '../../ui/uiSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import AppDrawer from '../../drawer/component/AppDrawer';
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const navItems = ['Home', 'About', 'Contact'];
 
 const NavBar = () => {
-    const dispatch = useAppDispatch();
-    const drawerOpen = useAppSelector(selectDrawerOpen);
-    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+    const dispatch = useAppDispatch()
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const isDark = useAppSelector(selectDark);
-    const { classes, cx } = useStyles();
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget)
 
-    const toggleDrawer = (event: React.MouseEvent<HTMLElement>) => {
-      dispatch(openDrawer(!drawerOpen));
-      setAnchorElNav(event.currentTarget);
-    };
 
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
 
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
+    const handleCloseUserMenu = () => setAnchorElUser(null)
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+
+   
+
 
     return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <NavigationOutlined />
-                    <AdbIcon className={classes.icon} />
+        <Box>
+            <AppBar component="nav">
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        // onClick={handleDrawerToggle}
+                        sx={{ mr: 2, display: { sm: 'none' } }}
+                    >
+                        <MenuIcon />
+
+                    </IconButton>
+                    <AdbIcon sx={{ display: { xs: 'flex', }, mr: 1 }} />
                     <Typography
                         variant="h6"
-                        noWrap
-                        component="a"
-                        href="/"
-                        className={classes.textHeading}
+                        component="div"
+                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        Overwatch Companion
+                        MUI
                     </Typography>
-
-                    <Box className={classes.hamburgerMenu}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={toggleDrawer}
-                            color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                    <AppDrawer/>
-                        {/* <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
-                        >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu> */}
-                    </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        Overwatch Companion
-                    </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
+                    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+                        {navItems.map((item) => (
+                            <Button key={item} sx={{ color: '#fff' }}>
+                                {item}
                             </Button>
                         ))}
                     </Box>
-
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -141,17 +63,17 @@ const NavBar = () => {
                             </IconButton>
                         </Tooltip>
                         <Menu
-                            sx={{ mt: '45px' }}
+                            sx={{ mt: "45px" }}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
                             anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
+                                vertical: "top",
+                                horizontal: "right"
                             }}
                             keepMounted
                             transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
+                                vertical: "top",
+                                horizontal: "right"
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
@@ -159,10 +81,10 @@ const NavBar = () => {
                             <MenuItem onClick={() => dispatch(setDark(!isDark))}>
                                 <Typography textAlign="center">Theme: {isDark ?
                                     <Icon>
-                                        <DarkModeIcon style={{fontSize: "1rem"}}/>
+                                        <DarkModeIcon style={{ fontSize: "1rem" }} />
                                     </Icon>
                                     : <Icon>
-                                        <Brightness5 style={{fontSize: "1rem"}}/>
+                                        <Brightness5 style={{ fontSize: "1rem" }} />
                                     </Icon>}
                                 </Typography>
                             </MenuItem>
@@ -174,8 +96,13 @@ const NavBar = () => {
                         </Menu>
                     </Box>
                 </Toolbar>
-            </Container>
-        </AppBar>
-    );
-};
+            </AppBar>
+            <Box component="nav">
+                
+                    <AppDrawer/>
+                
+            </Box>
+        </Box>
+    )
+}
 export default NavBar;

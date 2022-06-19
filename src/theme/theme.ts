@@ -8,7 +8,7 @@ export const theme = responsiveFontSizes(
     palette: {
       mode: "light",
     },
-    ...typographySettings,
+    // ...typographySettings,
     components: {},
   })
 );
@@ -18,7 +18,7 @@ export const darkTheme = responsiveFontSizes(
     palette: {
       mode: 'dark',
     },
-    ...typographySettings,
+    // ...typographySettings,
     components: {},
   })
 );
