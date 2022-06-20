@@ -1,21 +1,23 @@
 import { Divider, Drawer, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { FC, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { openDrawer, selectDrawerOpen } from "../drawerSlice";
 
 const navItems = ['Home', 'About', 'Contact'];
 
 interface AppDrawerProps { }
 
 const AppDrawer: FC<AppDrawerProps> = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const drawerOpen = useAppSelector(selectDrawerOpen);
   const drawerWidth = 240;
-
-  const handleDrawerToggle = () => setMobileOpen(!mobileOpen)
+  const dispatch = useAppDispatch();
+  const handleDrawerToggle = () => dispatch(openDrawer(!drawerOpen));
 
   return (
     <Drawer
       variant="temporary"
-      open={mobileOpen}
+      open={drawerOpen}
       onClose={handleDrawerToggle}
       ModalProps={{
         keepMounted: true, // Better open performance on mobile.

@@ -1,41 +1,35 @@
-import { AppBar, Avatar, Button, Divider, Drawer, Icon, IconButton, List, ListItem, ListItemButton, ListItemText, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material'
+import { AppBar, Avatar, Button, Icon, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Brightness5, NavigationOutlined } from '@mui/icons-material';
-
+import { Brightness5 } from '@mui/icons-material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import { selectDark, setDark } from '../../ui/uiSlice';
+import { selectDark, setDark } from '../../theme/themeSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import AppDrawer from '../../drawer/component/AppDrawer';
+import { openDrawer, selectDrawerOpen } from '../../drawer/drawerSlice';
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const navItems = ['Home', 'About', 'Contact'];
 
-const NavBar = () => {
+interface NavBarProps { }
+
+const NavBar: FC<NavBarProps> = () => {
     const dispatch = useAppDispatch()
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const isDark = useAppSelector(selectDark);
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget)
-
-
-
     const handleCloseUserMenu = () => setAnchorElUser(null)
-
-
-   
-
+    const drawerOpen = useAppSelector(selectDrawerOpen);
+    const handleDrawerToggle = () => dispatch(openDrawer(!drawerOpen))
 
     return (
         <Box>
             <AppBar component="nav">
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        // onClick={handleDrawerToggle}
+                    <IconButton color="inherit" aria-label="open drawer" edge="start"
+                        onClick={handleDrawerToggle}
                         sx={{ mr: 2, display: { sm: 'none' } }}
                     >
                         <MenuIcon />
@@ -98,9 +92,7 @@ const NavBar = () => {
                 </Toolbar>
             </AppBar>
             <Box component="nav">
-                
-                    <AppDrawer/>
-                
+                <AppDrawer />
             </Box>
         </Box>
     )
