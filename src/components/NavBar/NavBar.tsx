@@ -3,44 +3,50 @@ import { Box } from "@mui/system";
 import { FC } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
+import { ReactComponent as Ow2Icon } from "../../assets/svg/Ow2Logo.svg";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { openDrawer, selectDrawerOpen } from "../../app/features/drawer/drawerSlice";
 import UserMenu from "../UserMenu/UserMenu";
 import useStyles from "./NavBar.styles";
+import AppDrawer from "../AppDrawer/AppDrawer";
 
 const navItems = ["Home", "About", "Contact"];
 
-interface NavBarProps {
-    children?: JSX.Element | JSX.Element[]
-}
+interface NavBarProps { }
 
-const NavBar: FC<NavBarProps> = ({ children }) => {
+const NavBar: FC<NavBarProps> = () => {
     const dispatch = useAppDispatch();
     const drawerOpen = useAppSelector(selectDrawerOpen);
     const handleDrawerToggle = () => dispatch(openDrawer(!drawerOpen));
     const { classes } = useStyles();
-
     return (
-        <Box>
+        <Box p={1}>
             <AppBar component={"nav"}>
                 <Toolbar>
-                    <IconButton color={"inherit"} aria-label={"open drawer"} edge={"start"}
+                    <IconButton
+                        edge={"start"}
+                        color={"inherit"}
+                        aria-label={"open drawer"}
                         onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: "none" } }}
+                        className={classes.hamburgerIcon}
                     >
                         <MenuIcon />
                     </IconButton>
-                    <AdbIcon className={classes.icon} />
+                    <Ow2Icon className={classes.icon} />
                     <Typography
+                        aria-label={"app-title"}
                         variant={"h6"}
                         component={"div"}
-                        sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+                        className={classes.appTitle}
                     >
-                        {"MUI"}
+                        {"Overwatch Companion"}
                     </Typography>
-                    <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                    <Box className={classes.navItemBox}>
+                        <Button className={classes.navItemButton}>
+                            {"Dashboard"}
+                        </Button>
                         {navItems.map((item) => (
-                            <Button key={item} sx={{ color: "#fff" }}>
+                            <Button key={item} className={classes.navItemButton}>
                                 {item}
                             </Button>
                         ))}
@@ -48,7 +54,7 @@ const NavBar: FC<NavBarProps> = ({ children }) => {
                     <UserMenu />
                 </Toolbar>
             </AppBar>
-            {children}
+            <AppDrawer />
         </Box>
     );
 };

@@ -1,41 +1,34 @@
 import { makeStyles } from "../../utils/makeStyles";
 
-// icon;
-// sx={{ display: { xs: "flex", }, mr: 1 }}
-
 const useStyles = makeStyles({ name: "Navbar Styles" })((theme) => ({
     icon: {
-        marginRight: 1,
+        marginRight: 10,
+        maxHeight: 50,
         [theme.breakpoints.up("xs")]: {
-            display: "none",
-        },
-        [theme.breakpoints.up("md")]: {
-            display: "flex",
+            padding: theme.spacing(1),
         },
     },
-    textHeading: {
-        mr: 2,
-        fontFamily: "monospace",
-        fontWeight: 700,
-        letterSpacing: ".3rem",
-        color: "inherit",
-        textDecoration: "none",
-        [theme.breakpoints.up("xs")]: {
+    hamburgerIcon: {
+        marginRight: 2,
+        [theme.breakpoints.up("sm")]: {
             display: "none",
-        },
-        [theme.breakpoints.up("md")]: {
-            display: "flex",
-        },
+        }
     },
-    hamburgerMenu: {
+    appTitle: {
         flexGrow: 1,
+    },
+    navItemBox: {
         [theme.breakpoints.up("xs")]: {
-            display: "flex",
-        },
-        [theme.breakpoints.up("md")]: {
             display: "none",
         },
+        [theme.breakpoints.up("sm")]: {
+            display: "block",
+        }
+    },
+    navItemButton: {
+        color: theme.palette.common.white
     }
-}));
+}
+));
 
 export default useStyles;

@@ -1,6 +1,7 @@
 import { Box } from "@mui/system";
 import { FC, ReactNode } from "react";
 import AppSnackbar from "../../components/AppSnackbar/AppSnackbar";
+import useStyles from "./ViewProvider.styles";
 
 interface ViewProviderProps {
     children: ReactNode
@@ -8,8 +9,9 @@ interface ViewProviderProps {
 }
 
 const ViewProvider: FC<ViewProviderProps> = ({ children }: ViewProviderProps) => {
+    const {classes} = useStyles();
     return (
-        <Box component={"main"} sx={{ p: 3 }}>
+        <Box component={"main"} className={classes.container}>
             {children}
             <AppSnackbar/>
         </Box>

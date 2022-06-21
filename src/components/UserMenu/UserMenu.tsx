@@ -5,30 +5,31 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectDark, setDark } from "../../app/features/theme/themeSlice";
 import { Brightness5 } from "@mui/icons-material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import useStyles from "./UserMenu.styles";
 
 interface NavBarItemsProps { }
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const UserMenu: FC<NavBarItemsProps> = () => {
-
+    const { classes } = useStyles();
+    const dispatch = useAppDispatch();
+    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const isDark = useAppSelector(selectDark);
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget);
     const handleCloseUserMenu = () => setAnchorElUser(null);
-    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-    const dispatch = useAppDispatch();
-    const isDark = useAppSelector(selectDark);
 
     return (
         <Box>
             <Tooltip title={"Open settings"}>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt={"Remy Sharp"} src={"/static/images/avatar/2.jpg"} />
+                <IconButton onClick={handleOpenUserMenu}>
+                    <Avatar alt={"Name of User"} src={"/static/images/avatar/2.jpg"} />
                 </IconButton>
             </Tooltip>
             <Menu
-                sx={{ mt: "45px" }}
                 id={"menu-appbar"}
                 anchorEl={anchorElUser}
+                className={classes.position}
                 anchorOrigin={{
                     vertical: "top",
                     horizontal: "right"
@@ -44,10 +45,10 @@ const UserMenu: FC<NavBarItemsProps> = () => {
                 <MenuItem onClick={() => dispatch(setDark(!isDark))}>
                     <Typography textAlign={"center"}>{"Theme: "}{isDark ?
                         <Icon>
-                            <DarkModeIcon style={{ fontSize: "1rem" }} />
+                            <DarkModeIcon />
                         </Icon>
                         : <Icon>
-                            <Brightness5 style={{ fontSize: "1rem" }} />
+                            <Brightness5 />
                         </Icon>}
                     </Typography>
                 </MenuItem>

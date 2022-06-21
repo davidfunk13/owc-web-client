@@ -11,6 +11,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+import MuiThemeProvider from "./providers/MuiThemeProvider/MuiThemeProvider";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -24,7 +25,9 @@ root.render(
     <React.StrictMode>
         <Provider store={store}>
             <CacheProvider value={muiCache}>
-                <App />
+                <MuiThemeProvider>
+                    <App />
+                </MuiThemeProvider>
             </CacheProvider>
         </Provider>
     </React.StrictMode>
