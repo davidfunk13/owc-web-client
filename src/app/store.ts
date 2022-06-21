@@ -1,8 +1,8 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
-import drawerReducer from '../features/drawer/drawerSlice';
-import snackbarReducer from '../features/snackbar/snackbarSlice';
-import themeReducer from '../features/theme/themeSlice';
+import counterReducer from './features/counter/counterSlice';
+import drawerReducer from './features/drawer/drawerSlice';
+import snackbarReducer from './features/snackbar/snackbarSlice';
+import themeReducer from './features/theme/themeSlice';
 
 export const store = configureStore({
   reducer: {

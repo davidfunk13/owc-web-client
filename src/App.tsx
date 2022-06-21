@@ -1,12 +1,12 @@
 
-import { useAppDispatch, useAppSelector } from "./app/hooks"
-import { selectSnackbarMessage, selectSnackbarVariant, openSnackbar } from "./features/snackbar/snackbarSlice"
+import { useAppSelector } from "./app/hooks"
 import { ThemeProvider } from '@mui/material/styles';
 import { theme, darkTheme } from './theme/theme'
-import { selectDark } from "./features/theme/themeSlice";
-import NavBar from './features/navbar/component/NavBar';
+import { selectDark } from "./app/features/theme/themeSlice";
+import NavBar from "./components/NavBar/NavBar";
 import ViewProvider from './providers/ViewProvider/ViewProvider';
 import { FC } from "react";
+import AppDrawer from "./components/AppDrawer/AppDrawer";
 
 interface AppProps { }
 
@@ -16,7 +16,9 @@ const App: FC<AppProps> = () => {
 
   return (
     <ThemeProvider theme={isDark ? darkTheme : theme}>
-      <NavBar />
+      <NavBar>
+        <AppDrawer />
+      </NavBar>
       <ViewProvider>
       </ViewProvider>
     </ThemeProvider>

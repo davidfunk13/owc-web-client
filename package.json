@@ -34,7 +34,31 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "react/jsx-curly-brace-presence": [
+        "error",
+        {
+          "props": "always",
+          "children": "always",
+          "propElementValues": "always"
+        }
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "indent": [
+        "error"
+      ],
+      "no-multi-spaces": [
+        "error"
+      ]
+    }
   },
   "browserslist": {
     "production": [

@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../store";
 
 export interface SnackbarState {
     open: false,
@@ -12,10 +12,10 @@ export const initialState: SnackbarState = {
     open: false,
     message: "",
     variant: "success"
-  };
+};
 
 export const snackbarSlice = createSlice({
-    name: 'snackbar',
+    name: "snackbar",
     initialState,
     reducers: {
         openSnackbar: (state, action) => {

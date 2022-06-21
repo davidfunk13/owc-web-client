@@ -1,6 +1,5 @@
-import { ToolbarClasses } from "@mui/material";
 import { CSSProperties } from "@mui/styled-engine";
-import { makeStyles } from "../../../utils/makeStyles";
+import { makeStyles } from "../../utils/makeStyles";
 
 const useStyles = makeStyles({name:"AppDrawer Styles"})((theme) => ({
     drawerHeader: {
@@ -13,11 +12,11 @@ const useStyles = makeStyles({name:"AppDrawer Styles"})((theme) => ({
     drawerStyle: {
         width: 240,
         flexShrink: 0,
-        '& .MuiDrawer-paper': {
+        "& .MuiDrawer-paper": {
             width: 240,
-            boxSizing: 'border-box',
+            boxSizing: "border-box",
         },
     }
 }));
 
-export default useStyles
+export default useStyles;

@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../store";
 
 export interface DrawerState {
     open: boolean
@@ -10,7 +10,7 @@ const initialState: DrawerState = {
 };
 
 export const drawerSlice = createSlice({
-    name: 'drawer',
+    name: "drawer",
     initialState,
     reducers: {
         openDrawer: (state, action) => {

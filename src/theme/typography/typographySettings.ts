@@ -28,6 +28,6 @@ const typographySettings = {
             fontWeight: headingWeight
         },
     }
-}
+};
 
-export default typographySettings
+export default typographySettings;
