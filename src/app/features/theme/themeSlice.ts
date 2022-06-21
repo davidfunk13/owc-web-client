@@ -1,11 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
+import ThemeSliceState from "./ThemeSliceState";
 
-export interface ThemeState {
-    dark: boolean
-}
-
-export const initialState: ThemeState = {
+export const initialState: ThemeSliceState = {
     dark: JSON.parse(sessionStorage.getItem("isDark") as string) ?? false
 };
 export const themeSlice = createSlice({
@@ -16,11 +13,15 @@ export const themeSlice = createSlice({
             state.dark = action.payload;
             sessionStorage.setItem("isDark", JSON.stringify(state.dark));
         },
+        resetThemeSlice: (state) => {
+            sessionStorage.removeItem("isDark");
+            Object.assign(state, initialState);
+        },
     },
     extraReducers: (builder) => { },
 });
 
-export const { setDark } = themeSlice.actions;
+export const { setDark, resetThemeSlice } = themeSlice.actions;
 
 export const selectDark = (state: RootState) => state.theme.dark;
 

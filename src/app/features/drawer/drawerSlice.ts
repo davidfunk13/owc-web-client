@@ -1,11 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
+import DrawerSliceState from "./DrawerSliceState";
 
-export interface DrawerState {
-    open: boolean
-}
-
-const initialState: DrawerState = {
+export const initialState: DrawerSliceState = {
     open: false,
 };
 

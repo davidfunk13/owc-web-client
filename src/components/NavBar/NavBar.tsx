@@ -19,6 +19,7 @@ const NavBar: FC<NavBarProps> = ({ children }) => {
     const drawerOpen = useAppSelector(selectDrawerOpen);
     const handleDrawerToggle = () => dispatch(openDrawer(!drawerOpen));
     const { classes } = useStyles();
+
     return (
         <Box>
             <AppBar component={"nav"}>

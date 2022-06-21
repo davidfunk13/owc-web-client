@@ -1,34 +1,33 @@
 import counterReducer, {
-    CounterState,
     increment,
     decrement,
     incrementByAmount,
+    initialState as initialCounterState
 } from "../counterSlice";
+import CounterSliceSate from "../CounterSliceState";
+
+const mockState: CounterSliceSate = {
+    value: 3,
+    status: "idle",
+};
 
 describe("counter reducer", () => {
-    const initialState: CounterState = {
-        value: 3,
-        status: "idle",
-    };
-    it("should handle initial state", () => {
-        expect(counterReducer(undefined, { type: "unknown" })).toEqual({
-            value: 0,
-            status: "idle",
-        });
+    it("Should handle initial Counter state", () => {
+        expect(counterReducer(undefined, { type: "unknown" })).toEqual(initialCounterState);
     });
 
     it("should handle increment", () => {
-        const actual = counterReducer(initialState, increment());
+        const actual = counterReducer(mockState, increment());
         expect(actual.value).toEqual(4);
     });
 
     it("should handle decrement", () => {
-        const actual = counterReducer(initialState, decrement());
+        const actual = counterReducer(mockState, decrement());
         expect(actual.value).toEqual(2);
     });
 
     it("should handle incrementByAmount", () => {
-        const actual = counterReducer(initialState, incrementByAmount(2));
+        const actual = counterReducer(mockState, incrementByAmount(2));
         expect(actual.value).toEqual(5);
     });
 });

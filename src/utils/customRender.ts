@@ -1,29 +1,23 @@
-//deal with this when you set shit up.
+import React, {FC, ReactElement} from "react";
+import {render, RenderOptions} from "@testing-library/react";
+
+// const AllTheProviders: FC<{children: React.ReactNode}> = ({children}) => {
+//   return (
+//     <ThemeProvider theme="light">
+//       <TranslationProvider messages={defaultStrings}>
+//         {children}
+//       </TranslationProvider>
+//     </ThemeProvider>
+//   )
+// }
 
 const customRender = (
-//     ui,
-//     {
-//       initialState = reducerInitialState,
-//       store = createStore(reducer, initialState),
-//       theme = defaultTheme,
-//       locale = defaultLocale,
-//       ...renderOptions
-//     }
-  ) => {
-//     function Wrapper({ children }) {
-//       return (
-//         <ThemeProvider theme={theme}>
-//           <IntlProvider locale={locale}>
-//             <Provider store={store}>{children}</Provider>
-//           </IntlProvider>
-//         </ThemeProvider>
-//       );
-//     }
-//     return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
-  };
+    ui: ReactElement,
+    options?: Omit<RenderOptions, "wrapper">,
+) => render(ui, {
+    // wrapper: AllTheProviders,
+    ...options
+});
 
-  // re-export everything
-  export * from "@testing-library/react";
-  // override render method
-  export { customRender as render };
-  
+export * from "@testing-library/react";
+export {customRender as render};
