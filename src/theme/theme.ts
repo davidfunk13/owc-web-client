@@ -1,12 +1,13 @@
 
 import { createTheme, responsiveFontSizes } from "@mui/material";
+import typographySettings from "./typography/typographySettings";
 
 export const theme = responsiveFontSizes(
     createTheme({
         palette: {
             mode: "light",
         },
-        // ...typographySettings,
+        ...typographySettings,
         components: {},
     })
 );
@@ -16,7 +17,7 @@ export const darkTheme = responsiveFontSizes(
         palette: {
             mode: "dark",
         },
-        // ...typographySettings,
+        ...typographySettings,
         components: {},
     })
 );

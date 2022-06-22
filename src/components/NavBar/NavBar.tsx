@@ -2,15 +2,14 @@ import { AppBar, Button, IconButton, Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { FC } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import AdbIcon from "@mui/icons-material/Adb";
 import { ReactComponent as Ow2Icon } from "../../assets/svg/Ow2Logo.svg";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { openDrawer, selectDrawerOpen } from "../../app/features/drawer/drawerSlice";
 import UserMenu from "../UserMenu/UserMenu";
 import useStyles from "./NavBar.styles";
 import AppDrawer from "../AppDrawer/AppDrawer";
-
-const navItems = ["Home", "About", "Contact"];
+import NavItem from "../NavItem/NavItem";
+import navItems from "../../navItems";
 
 interface NavBarProps { }
 
@@ -19,6 +18,7 @@ const NavBar: FC<NavBarProps> = () => {
     const drawerOpen = useAppSelector(selectDrawerOpen);
     const handleDrawerToggle = () => dispatch(openDrawer(!drawerOpen));
     const { classes } = useStyles();
+
     return (
         <Box p={1}>
             <AppBar component={"nav"}>
@@ -42,16 +42,13 @@ const NavBar: FC<NavBarProps> = () => {
                         {"Overwatch Companion"}
                     </Typography>
                     <Box className={classes.navItemBox}>
-                        <Button className={classes.navItemButton}>
-                            {"Dashboard"}
-                        </Button>
-                        {navItems.map((item) => (
-                            <Button key={item} className={classes.navItemButton}>
-                                {item}
-                            </Button>
-                        ))}
+                        {navItems.map(item=>{
+                            const {name, to} = item;
+                            return <NavItem key={name} name={name} to={to}/>;                            
+                        })}
                     </Box>
                     <UserMenu />
+                    {/* <Button variant={"text"} title={"Login"}/> */}
                 </Toolbar>
             </AppBar>
             <AppDrawer />

@@ -1,16 +1,17 @@
-import { Divider, Drawer, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
+import { Divider, Drawer, List, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { FC } from "react";
 import { openDrawer, selectDrawerOpen } from "../../app/features/drawer/drawerSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import navItems from "../../navItems";
+import DrawerItem from "../DrawerItem/DrawerItem";
 
-const navItems = ["Home", "About", "Contact"];
 
 interface AppDrawerProps { }
 
 const AppDrawer: FC<AppDrawerProps> = () => {
     const drawerOpen = useAppSelector(selectDrawerOpen);
-    const drawerWidth = 240;
+    const drawerWidth = "50%";
     const dispatch = useAppDispatch();
     const handleDrawerToggle = () => dispatch(openDrawer(!drawerOpen));
 
@@ -24,23 +25,20 @@ const AppDrawer: FC<AppDrawerProps> = () => {
                     keepMounted: true, // Better open performance on mobile.
                 }}
                 sx={{
-                    display: { xs: "block", sm: "none" },
+                    display: { xs: "block", md: "none" },
                     "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
                 }}
             >
                 <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }} >
                     <Typography variant={"h6"} sx={{ my: 2 }}>
-                        {"MUI"}
+                        {"Overwatch Companion"}
                     </Typography>
                     <Divider />
                     <List>
-                        {navItems.map((item) => (
-                            <ListItem key={item} disablePadding>
-                                <ListItemButton sx={{ textAlign: "center" }}>
-                                    <ListItemText primary={item} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
+                        {navItems.map((item) => {
+                            const { name, to } = item;
+                            return <DrawerItem key={name} name={name} to={to} />;
+                        })}
                     </List>
                 </Box >
             </Drawer>

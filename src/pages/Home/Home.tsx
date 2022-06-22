@@ -2,16 +2,16 @@ import { Typography } from "@mui/material";
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 
-interface PageNotFoundProps { }
+interface HomeProps { }
 
-const PageNotFound: FC<PageNotFoundProps> = () => {
+const Home: FC<HomeProps> = () => {
     return (
         <ViewProvider>
             <Typography variant={"h1"}>
-                {"404 Page Not Found"}
+                {"Home"}
             </Typography>
         </ViewProvider>
     );
 };
 
-export default PageNotFound;
+export default Home;

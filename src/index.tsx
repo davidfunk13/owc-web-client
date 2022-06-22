@@ -12,6 +12,7 @@ import "@fontsource/roboto/700.css";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import MuiThemeProvider from "./providers/MuiThemeProvider/MuiThemeProvider";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -23,6 +24,11 @@ export const muiCache = createCache({
 
 root.render(
     <React.StrictMode>
+        {/* <Auth0Provider
+            domain={"df-auth.us.auth0.com"}
+            clientId={"ZEl8YIN1gOP9xXyTot88iGA9jF2eibED"}
+            redirectUri={window.location.origin}
+        > */}
         <Provider store={store}>
             <CacheProvider value={muiCache}>
                 <MuiThemeProvider>
@@ -30,6 +36,7 @@ root.render(
                 </MuiThemeProvider>
             </CacheProvider>
         </Provider>
+        {/* </Auth0Provider> */}
     </React.StrictMode>
 );
 
