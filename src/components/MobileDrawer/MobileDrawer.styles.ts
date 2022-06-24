@@ -1,7 +1,7 @@
 import { CSSProperties } from "@mui/styled-engine";
 import { makeStyles } from "../../utils/makeStyles";
 
-const useStyles = makeStyles({name:"AppDrawer Styles"})((theme) => ({
+const useStyles = makeStyles({name:"MobileDrawer Styles"})((theme) => ({
     drawerHeader: {
         display: "flex",
         alignItems: "center",

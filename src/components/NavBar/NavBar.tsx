@@ -7,9 +7,10 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { openDrawer, selectDrawerOpen } from "../../app/features/drawer/drawerSlice";
 import UserMenu from "../UserMenu/UserMenu";
 import useStyles from "./NavBar.styles";
-import AppDrawer from "../AppDrawer/AppDrawer";
+import MobileDrawer from "../MobileDrawer/MobileDrawer";
 import NavItem from "../NavItem/NavItem";
 import navItems from "../../navItems";
+import LoginButton from "../LoginButton/LoginButton";
 
 interface NavBarProps { }
 
@@ -20,39 +21,37 @@ const NavBar: FC<NavBarProps> = () => {
     const { classes } = useStyles();
 
     return (
-        <Box p={1}>
-            <AppBar component={"nav"}>
-                <Toolbar>
-                    <IconButton
-                        edge={"start"}
-                        color={"inherit"}
-                        aria-label={"open drawer"}
-                        onClick={handleDrawerToggle}
-                        className={classes.hamburgerIcon}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Ow2Icon className={classes.icon} />
-                    <Typography
-                        aria-label={"app-title"}
-                        variant={"h6"}
-                        component={"div"}
-                        className={classes.appTitle}
-                    >
-                        {"Overwatch Companion"}
-                    </Typography>
-                    <Box className={classes.navItemBox}>
-                        {navItems.map(item=>{
-                            const {name, to} = item;
-                            return <NavItem key={name} name={name} to={to}/>;                            
-                        })}
-                    </Box>
-                    <UserMenu />
-                    {/* <Button variant={"text"} title={"Login"}/> */}
-                </Toolbar>
-            </AppBar>
-            <AppDrawer />
-        </Box>
+        <AppBar position={"fixed"} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+            <Toolbar>
+                <IconButton
+                    edge={"start"}
+                    color={"inherit"}
+                    aria-label={"open drawer"}
+                    onClick={handleDrawerToggle}
+                    className={classes.hamburgerIcon}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <Ow2Icon className={classes.icon} />
+                <Typography
+                    aria-label={"app-title"}
+                    variant={"h6"}
+                    component={"div"}
+                    className={classes.appTitle}
+                >
+                    {"Overwatch Companion"}
+                </Typography>
+                <Box className={classes.navItemBox}>
+                    {navItems.map(item => {
+                        const { name, to } = item;
+                        return <NavItem key={name} name={name} to={to} />;
+                    })}
+                </Box>
+                <UserMenu />
+                <LoginButton />
+            </Toolbar>
+            {/* <MobileDrawer/> */}
+        </AppBar>
     );
 };
 

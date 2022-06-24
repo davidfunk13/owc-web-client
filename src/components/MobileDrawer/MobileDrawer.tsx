@@ -7,9 +7,9 @@ import navItems from "../../navItems";
 import DrawerItem from "../DrawerItem/DrawerItem";
 
 
-interface AppDrawerProps { }
+interface MobileDrawerProps { }
 
-const AppDrawer: FC<AppDrawerProps> = () => {
+const MobileDrawer: FC<MobileDrawerProps> = () => {
     const drawerOpen = useAppSelector(selectDrawerOpen);
     const drawerWidth = "50%";
     const dispatch = useAppDispatch();
@@ -46,4 +46,4 @@ const AppDrawer: FC<AppDrawerProps> = () => {
     );
 };
 
-export default AppDrawer;
+export default MobileDrawer;
