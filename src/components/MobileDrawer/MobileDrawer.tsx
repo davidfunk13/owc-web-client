@@ -21,7 +21,7 @@ const MobileDrawer: FC<MobileDrawerProps> = () => {
         return () => {
             dispatch(openDrawer(false));
         };
-    }, []);
+    }, [dispatch]);
 
     return (
         <Box component={"nav"}>
