@@ -18,11 +18,8 @@ import { CssBaseline } from "@mui/material";
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 
-export const muiCache = createCache({
-    key: "mui",
-    prepend: true,
-});
-console.log({ domain: process.env.REACT_APP_AUTH0_DOMAIN, clientId: process.env.REACT_APP_AUTH0_CLIENT_ID });
+export const muiCache = createCache({ key: "mui", prepend: true });
+
 root.render(
     <React.StrictMode>
         <Auth0Provider
