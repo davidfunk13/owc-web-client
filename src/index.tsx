@@ -1,32 +1,48 @@
-import { ChakraProvider, ColorModeScript, theme } from "@chakra-ui/react"
-import * as React from "react"
-import ReactDOM from "react-dom"
-import { Provider } from "react-redux"
-import App from "./app/App"
-import { store } from "./app/store"
-import Navbar from "./components/Navbar/Navbar"
-import reportWebVitals from "./reportWebVitals"
-import * as serviceWorker from "./serviceWorker"
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import "./index.css";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+import MuiThemeProvider from "./providers/MuiThemeProvider/MuiThemeProvider";
+import { Auth0Provider } from "@auth0/auth0-react";
+import { CssBaseline } from "@mui/material";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <ColorModeScript />
-    <Provider store={store}>
-      <ChakraProvider theme={theme}>
-        <Navbar />
-        <App />
-      </ChakraProvider>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById("root"),
-)
+const container = document.getElementById("root")!;
+const root = createRoot(container);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://cra.link/PWA
-serviceWorker.unregister()
+export const muiCache = createCache({
+    key: "mui",
+    prepend: true,
+});
+console.log({ domain: process.env.REACT_APP_AUTH0_DOMAIN, clientId: process.env.REACT_APP_AUTH0_CLIENT_ID });
+root.render(
+    <React.StrictMode>
+        <Auth0Provider
+            domain={String(process.env.REACT_APP_AUTH0_DOMAIN)}
+            clientId={String(process.env.REACT_APP_AUTH0_CLIENT_ID)}
+            redirectUri={window.location.origin}
+        >
+            <Provider store={store}>
+                <CacheProvider value={muiCache}>
+                    <MuiThemeProvider>
+                        <CssBaseline />
+                        <App />
+                    </MuiThemeProvider>
+                </CacheProvider>
+            </Provider>
+        </Auth0Provider>
+    </React.StrictMode>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals()
+reportWebVitals();
