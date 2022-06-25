@@ -12,17 +12,19 @@ const AppSnackbar: FC<AppSnackbarProps> = () => {
     const snackbarOpen = !!snackbarMessage;
 
     const handleCloseSnackbar = () => dispatch(openSnackbar(false));
-    return (<Snackbar
-        data-testid={"snackbar"}
-        open={snackbarOpen}
-        autoHideDuration={5000}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        onClose={handleCloseSnackbar}
-    >
-        <Alert data-testid={"snackbar-message"} severity={snackbarVariant} onClose={handleCloseSnackbar}>
-            {snackbarMessage}
-        </Alert>
-    </Snackbar>);
+    return (
+        <Snackbar
+            data-testid={"snackbar"}
+            open={snackbarOpen}
+            autoHideDuration={5000}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            onClose={handleCloseSnackbar}
+        >
+            <Alert data-testid={"snackbar-message"} severity={snackbarVariant} onClose={handleCloseSnackbar}>
+                {snackbarMessage}
+            </Alert>
+        </Snackbar>
+    );
 };
 
 export default AppSnackbar;

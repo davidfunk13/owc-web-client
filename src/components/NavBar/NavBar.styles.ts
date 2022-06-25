@@ -1,19 +1,17 @@
 import { makeStyles } from "../../utils/makeStyles";
 
 const useStyles = makeStyles({ name: "Navbar Styles" })((theme) => ({
+    appBar: {
+        position: "fixed",
+        zIndex: theme.zIndex.drawer + 1
+    },
     icon: {
         marginRight: 10,
         height: 50,
-        minWidth:100,
+        minWidth: 100,
         [theme.breakpoints.up("xs")]: {
             padding: theme.spacing(1),
         },
-    },
-    hamburgerIcon: {
-        marginRight: 2,
-        [theme.breakpoints.up("md")]: {
-            display: "none",
-        }
     },
     appTitle: {
         flexGrow: 1,
@@ -24,9 +22,8 @@ const useStyles = makeStyles({ name: "Navbar Styles" })((theme) => ({
         },
         [theme.breakpoints.up("md")]: {
             display: "block",
-        }
+        },
     },
-    
 }
 ));
 

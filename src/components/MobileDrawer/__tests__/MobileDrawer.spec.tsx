@@ -1,12 +1,12 @@
 import { screen } from "@testing-library/react";
 import AppDrawer from "../MobileDrawer";
-import { render } from "../../../utils/customRender";
+import { render } from "../../../utils/__testUtils__/customRender";
 
-describe("AppDrawer", () => {
+describe("MobileDrawer Tests", () => {
     it("Should find the heading", () => {
         render(<AppDrawer />);
 
-        const navigationText = screen.getByText(/mui/i);
+        const navigationText = screen.getByText(/overwatch companion/i);
 
         expect(navigationText).toBeInTheDocument();
     });

@@ -22,12 +22,12 @@ export const muiCache = createCache({
     key: "mui",
     prepend: true,
 });
-
+console.log({ domain: process.env.REACT_APP_AUTH0_DOMAIN, clientId: process.env.REACT_APP_AUTH0_CLIENT_ID });
 root.render(
     <React.StrictMode>
         <Auth0Provider
-            domain={"df-auth.us.auth0.com"}
-            clientId={"ZEl8YIN1gOP9xXyTot88iGA9jF2eibED"}
+            domain={String(process.env.REACT_APP_AUTH0_DOMAIN)}
+            clientId={String(process.env.REACT_APP_AUTH0_CLIENT_ID)}
             redirectUri={window.location.origin}
         >
             <Provider store={store}>

@@ -1,5 +1,4 @@
-import { Avatar, Icon, IconButton, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Avatar, Box, BoxProps, Icon, IconButton, Menu, MenuItem, PopoverOrigin, Tooltip, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { selectDark, setDark } from "../../app/features/theme/themeSlice";
@@ -7,20 +6,21 @@ import { Brightness5 } from "@mui/icons-material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import useStyles from "./UserMenu.styles";
 
-interface NavBarItemsProps { }
+interface UserMenuProps { }
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-const UserMenu: FC<NavBarItemsProps> = () => {
+const UserMenu: FC<UserMenuProps & BoxProps> = ({ p, pr }) => {
     const { classes } = useStyles();
     const dispatch = useAppDispatch();
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const isDark = useAppSelector(selectDark);
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget);
     const handleCloseUserMenu = () => setAnchorElUser(null);
+    const origin: PopoverOrigin = { vertical: "top", horizontal: "right" };
 
     return (
-        <Box>
+        <Box p={p} pr={pr}>
             <Tooltip title={"Open settings"}>
                 <IconButton onClick={handleOpenUserMenu}>
                     <Avatar alt={"Name of User"} src={"/static/images/avatar/2.jpg"} />
@@ -30,15 +30,9 @@ const UserMenu: FC<NavBarItemsProps> = () => {
                 id={"menu-appbar"}
                 anchorEl={anchorElUser}
                 className={classes.position}
-                anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right"
-                }}
+                anchorOrigin={origin}
+                transformOrigin={origin}
                 keepMounted
-                transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right"
-                }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
             >
