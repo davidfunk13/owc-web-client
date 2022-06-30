@@ -12,22 +12,29 @@ import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import { theme } from "./theme/theme";
 import MobileDrawer from "./components/MobileDrawer/MobileDrawer";
 import navItems from "./utils/navItems";
-import { selectIsAuthenticated, setIsAuthenticated } from "./app/features/auth/authSlice";
+import { selectIsAuthenticated, setIsAuthenticated, setUser } from "./app/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 
 interface AppProps { }
 
 const App: FC<AppProps> = () => {
     const { classes } = useStyles();
-    const { isAuthenticated } = useAuth0();
+    const { isAuthenticated, user } = useAuth0();
     const desktopDrawerBreakpoint = useMediaQuery(theme.breakpoints.up("md"));
     const dispatch = useAppDispatch();
     const isAuthed = useAppSelector(selectIsAuthenticated);
 
     useEffect(() => {
+
         dispatch(setIsAuthenticated(isAuthenticated));
-        //   return () => {}
-    }, [dispatch, isAuthenticated]);
+        dispatch(setUser(user));
+
+        return () => {
+            dispatch(setIsAuthenticated(false));
+            dispatch(setUser(undefined));
+        };
+        
+    }, [dispatch, isAuthenticated, user]);
 
     return (
         <BrowserRouter>

@@ -47,7 +47,7 @@ const NavBar: FC<NavBarProps> = () => {
                 >
                     {"Overwatch Companion"}
                 </Typography>
-                {isAuthed && <UserMenu user={user} pr={2} />}
+                {isAuthed && <UserMenu user={user} pr={1} />}
                 <Button 
                     aria-label={"Login Button"}
                     color={"inherit"} 
