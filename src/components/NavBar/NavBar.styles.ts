@@ -6,10 +6,10 @@ const useStyles = makeStyles({ name: "Navbar Styles" })((theme) => ({
         zIndex: theme.zIndex.drawer + 1
     },
     icon: {
-        marginRight: 10,
         height: 50,
         minWidth: 100,
-        [theme.breakpoints.up("xs")]: {
+        padding: theme.spacing(.5),
+        [theme.breakpoints.down("md")]: {
             padding: theme.spacing(1),
         },
     },

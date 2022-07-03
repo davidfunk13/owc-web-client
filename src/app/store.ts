@@ -3,9 +3,11 @@ import counterReducer from "./features/counter/counterSlice";
 import drawerReducer from "./features/drawer/drawerSlice";
 import snackbarReducer from "./features/snackbar/snackbarSlice";
 import themeReducer from "./features/theme/themeSlice";
+import authReducer from "./features/auth/authSlice";
 
 export const store = configureStore({
     reducer: {
+        auth: authReducer,
         counter: counterReducer,
         drawer: drawerReducer,
         snackbar: snackbarReducer,

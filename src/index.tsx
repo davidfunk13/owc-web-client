@@ -12,23 +12,21 @@ import "@fontsource/roboto/700.css";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import MuiThemeProvider from "./providers/MuiThemeProvider/MuiThemeProvider";
-import { Auth0Provider } from "@auth0/auth0-react";
 import { CssBaseline } from "@mui/material";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 
-export const muiCache = createCache({
-    key: "mui",
-    prepend: true,
-});
-console.log({ domain: process.env.REACT_APP_AUTH0_DOMAIN, clientId: process.env.REACT_APP_AUTH0_CLIENT_ID });
+export const muiCache = createCache({ key: "mui", prepend: true });
+
 root.render(
     <React.StrictMode>
         <Auth0Provider
             domain={String(process.env.REACT_APP_AUTH0_DOMAIN)}
             clientId={String(process.env.REACT_APP_AUTH0_CLIENT_ID)}
             redirectUri={window.location.origin}
+            cacheLocation={"localstorage"}
         >
             <Provider store={store}>
                 <CacheProvider value={muiCache}>

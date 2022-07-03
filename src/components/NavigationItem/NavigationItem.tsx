@@ -1,4 +1,4 @@
-import { ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import INavigationItem from "../../types/INavigationItem";
@@ -7,7 +7,7 @@ import INavigationItem from "../../types/INavigationItem";
 interface NavigationItemProps {
     name: INavigationItem["name"],
     IconComponent?: INavigationItem["IconComponent"]
-    to: INavigationItem["to"]
+    to?: INavigationItem["to"]
 }
 
 const NavigationItem: FC<NavigationItemProps> = ({ name, IconComponent, to }) => {
@@ -15,16 +15,18 @@ const NavigationItem: FC<NavigationItemProps> = ({ name, IconComponent, to }) =>
 
     const navigate = useNavigate();
 
-    const link = () => navigate(to);
+    const link = () => to && navigate(to);
 
     return (
-        <ListItem component={ListItemButton} onClick={link}>        
-            {IconComponent &&
+        <ListItem component={ListItemButton} onClick={link}> 
+            <Grid container>
+                {IconComponent &&
                 <ListItemIcon>
                     <IconComponent />
                 </ListItemIcon>
-            }
-            <ListItemText primary={name} />
+                }
+                <ListItemText primary={name} />
+            </Grid>      
         </ListItem>
 
 
