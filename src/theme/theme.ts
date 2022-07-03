@@ -2,7 +2,7 @@
 import { createTheme, responsiveFontSizes } from "@mui/material";
 import typographySettings from "./typography/typographySettings";
 
-const options = { factor: 6 };
+const options = { factor: 7 };
 
 export const theme = responsiveFontSizes(createTheme({
     palette: { mode: "light", },

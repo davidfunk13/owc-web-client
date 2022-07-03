@@ -14,6 +14,7 @@ import MobileDrawer from "./components/MobileDrawer/MobileDrawer";
 import navItems from "./utils/navItems";
 import { selectIsAuthenticated, setIsAuthenticated, setUser } from "./app/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
+import AddBattletag from "./pages/AddBattletag/AddBatteltag";
 
 interface AppProps { }
 
@@ -45,6 +46,7 @@ const App: FC<AppProps> = () => {
                         {desktopDrawerBreakpoint ? <DesktopDrawer /> : <MobileDrawer />}
                         <Routes>
                             <Route path={"/"} element={<Home />}></Route>
+                            <Route path={"/profile/add-battletag"} element={<AddBattletag />}></Route>
                             {navItems.map(({ to, Page }, index) =>
                                 <Route key={`route-${index}`} path={to} element={<Page />} />
                             )}
