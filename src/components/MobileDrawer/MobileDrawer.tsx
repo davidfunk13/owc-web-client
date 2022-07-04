@@ -31,23 +31,23 @@ const MobileDrawer: FC<MobileDrawerProps> = () => {
                 onClose={handleDrawerToggle}
                 ModalProps={modalProps}
             >
-                <Box onClick={handleDrawerToggle} >
-                    <Typography variant={"h5"} m={2}>
-                        {"Overwatch Companion"}
-                    </Typography>
-                    <Divider />
-                    <List>
-                        {navItems.map(({ name, to, IconComponent }, index) =>
-                            <DrawerItem
-                                key={`nav-item-${index}-${name}`}
-                                aria-label={`${name} Navgation Link`}
-                                to={to}
-                                name={name}
-                                IconComponent={IconComponent}
-                            />
-                        )}
-                    </List>
-                </Box >
+                {/* <Box onClick={handleDrawerToggle} > */}
+                <Typography variant={"h5"} m={2}>
+                    {"Overwatch Companion"}
+                </Typography>
+                <Divider />
+                <List>
+                    {navItems.map(({ name, to, IconComponent }, index) =>
+                        <DrawerItem
+                            key={`nav-item-${index}-${name}`}
+                            aria-label={`${name} Navgation Link`}
+                            to={to}
+                            name={name}
+                            IconComponent={IconComponent}
+                        />
+                    )}
+                </List>
+                {/* </Box > */}
             </Drawer>
         </Box>
     );

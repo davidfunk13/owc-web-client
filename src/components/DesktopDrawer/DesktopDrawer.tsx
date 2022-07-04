@@ -5,7 +5,7 @@ import useStyles from "./DesktopDrawer.styles";
 import navItems from "../../utils/navItems";
 import { LogoutOutlined } from "@mui/icons-material";
 import { useAuth0 } from "@auth0/auth0-react";
-import DrawerItem from "../NavigationItem/NavigationItem";
+import NavigationItem from "../NavigationItem/NavigationItem";
 
 interface DesktopDrawerProps { }
 
@@ -21,12 +21,12 @@ const DesktopDrawer: FC<DesktopDrawerProps & BoxProps> = () => {
             <Box className={classes.navListOverFlow}>
                 <List>
                     {navItems.map(({ name, to, IconComponent }, index) =>
-                        <DrawerItem 
+                        <NavigationItem
                             key={`nav-item-${index}-${name}`}
                             aria-label={`${name} Navgation Link`}
                             to={to}
                             name={name}
-                            IconComponent={IconComponent} 
+                            IconComponent={IconComponent}
                         />
                     )}
                 </List>
