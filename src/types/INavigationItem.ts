@@ -7,6 +7,7 @@ interface INavigationItem {
     IconComponent?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string; }
     to: string
     Page: FC
+    subItems: INavigationItem[]
 }
 
 export default INavigationItem;

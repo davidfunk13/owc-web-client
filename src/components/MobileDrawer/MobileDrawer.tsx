@@ -1,10 +1,12 @@
-import { Divider, Drawer, List, Typography } from "@mui/material";
+import { StarBorder } from "@mui/icons-material";
+import { Collapse, Divider, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { openDrawer, selectDrawerOpen } from "../../app/features/drawer/drawerSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import navItems from "../../utils/navItems";
-import DrawerItem from "../NavigationItem/NavigationItem";
+import NavigationItem from "../NavigationItem/NavigationItem";
 // import useStyles from "./MobileDrawer.styles";
 
 
@@ -31,23 +33,27 @@ const MobileDrawer: FC<MobileDrawerProps> = () => {
                 onClose={handleDrawerToggle}
                 ModalProps={modalProps}
             >
-                {/* <Box onClick={handleDrawerToggle} > */}
                 <Typography variant={"h5"} m={2}>
                     {"Overwatch Companion"}
                 </Typography>
                 <Divider />
                 <List>
-                    {navItems.map(({ name, to, IconComponent }, index) =>
-                        <DrawerItem
-                            key={`nav-item-${index}-${name}`}
-                            aria-label={`${name} Navgation Link`}
-                            to={to}
-                            name={name}
-                            IconComponent={IconComponent}
-                        />
+                    {navItems.map(({ name, to, IconComponent, subItems }, index) =>
+                        <Box>
+
+                            <NavigationItem
+                                key={`nav-item-${index}-${name}`}
+                                aria-label={`${name} Navgation Link`}
+                                to={to}
+                                name={name}
+                                IconComponent={IconComponent}
+                                subItems={subItems}
+                            />
+                        </Box>
+
+                        //sub items here.
                     )}
                 </List>
-                {/* </Box > */}
             </Drawer>
         </Box>
     );

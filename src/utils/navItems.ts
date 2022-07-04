@@ -16,17 +16,22 @@ import DonutSmallIcon from "@mui/icons-material/DonutSmall";
 import CompositionBuilder from "../pages/CompositionBuilder/CompositionBuilder";
 import { Home as HomeIcon } from "@mui/icons-material";
 import Home from "../pages/Home/Home";
+import AddBattletag from "../pages/AddBattletag/AddBattletag";
 
 const navItems: INavigationItem[] = [
-    { name: "Home", IconComponent: HomeIcon, to: "/", Page: Home },
-    { name: "Dashboard", IconComponent: DashboardIcon, to: "/dashboard", Page: Dashboard },
-    { name: "Profile", IconComponent: AccountCircleIcon, to: "/profile", Page: Profile },
-    { name: "Heroes", IconComponent: LocalHospitalIcon, to: "/heroes", Page: Heroes },
-    { name: "Composition Builder", IconComponent: ConstructionIcon, to: "/composition-builder", Page: CompositionBuilder },
-    { name: "Hero Picker", IconComponent: CheckBoxIcon, to: "/heroes", Page: Heroes },
-    { name: "Maps", IconComponent: MapIcon, to: "/maps", Page: Maps },
-    { name: "Track Games", IconComponent: QueryStatsIcon, to: "/track-games", Page: TrackGames },
-    { name: "Statistics", IconComponent: DonutSmallIcon, to: "/statistics", Page: Statistics },
+    { name: "Home", IconComponent: HomeIcon, to: "/", Page: Home, subItems: [] },
+    { name: "Dashboard", IconComponent: DashboardIcon, to: "/dashboard", Page: Dashboard, subItems: [] },
+    {
+        name: "Profile", IconComponent: AccountCircleIcon, to: "/profile", Page: Profile, subItems: [
+            { name: "Add Battletag", to: "/profile/add-batttletag", Page: AddBattletag, subItems: [] },
+        ]
+    },
+    { name: "Heroes", IconComponent: LocalHospitalIcon, to: "/heroes", Page: Heroes, subItems: [] },
+    { name: "Composition Builder", IconComponent: ConstructionIcon, to: "/composition-builder", Page: CompositionBuilder, subItems: [] },
+    { name: "Hero Picker", IconComponent: CheckBoxIcon, to: "/heroes", Page: Heroes, subItems: [] },
+    { name: "Maps", IconComponent: MapIcon, to: "/maps", Page: Maps, subItems: [] },
+    { name: "Track Games", IconComponent: QueryStatsIcon, to: "/track-games", Page: TrackGames, subItems: [] },
+    { name: "Statistics", IconComponent: DonutSmallIcon, to: "/statistics", Page: Statistics, subItems: [] },
 ];
 
 export default navItems;

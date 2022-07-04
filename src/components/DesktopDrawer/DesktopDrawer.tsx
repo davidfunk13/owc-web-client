@@ -20,9 +20,10 @@ const DesktopDrawer: FC<DesktopDrawerProps & BoxProps> = () => {
             <Toolbar />
             <Box className={classes.navListOverFlow}>
                 <List>
-                    {navItems.map(({ name, to, IconComponent }, index) =>
+                    {navItems.map(({ name, to, IconComponent, subItems }, index) =>
                         <NavigationItem
                             key={`nav-item-${index}-${name}`}
+                            subItems={subItems}
                             aria-label={`${name} Navgation Link`}
                             to={to}
                             name={name}

@@ -1,52 +1,70 @@
 import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import { Box, Collapse, Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, SyntheticEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { openDrawer, selectDrawerOpen } from "../../app/features/drawer/drawerSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import INavigationItem from "../../types/INavigationItem";
-// import useStyles from "./NavigationItem.styles";
 
 interface NavigationItemProps {
     name: INavigationItem["name"],
     IconComponent?: INavigationItem["IconComponent"]
     to?: INavigationItem["to"]
+    subItems: INavigationItem["subItems"]
 }
 
-const NavigationItem: FC<NavigationItemProps> = ({ name, IconComponent, to }) => {
-    // const { classes } = useStyles();
+
+const NavigationItem: FC<NavigationItemProps> = ({ name, IconComponent, to, subItems }) => {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const drawerOpen = useAppSelector(selectDrawerOpen);
+    
+    const link = () => {
+        to && navigate(to);
+        dispatch(openDrawer(false));
+    };
 
-    const link = () => to && navigate(to);
-
-    function toggleOpen() {
+    function toggleOpen(e: SyntheticEvent) {
+        e.preventDefault();
+        e.stopPropagation();
         setOpen(!open);
     }
 
     return (
         <Box>
             <ListItem component={ListItemButton} onClick={link}> 
-                <Grid container>
-                    {IconComponent &&
-                <ListItemIcon>
-                    <IconComponent />
-                </ListItemIcon>
-                    }
-                    <ListItemText primary={name} />
+                {/* <Grid container> */}
+                {IconComponent && <ListItemIcon><IconComponent /> </ListItemIcon>}
+                <ListItemText primary={name} />
+                {subItems.length > 0 && 
                     <IconButton onClick={toggleOpen}>
                         {open ? <ExpandLess /> : <ExpandMore />}
                     </IconButton>
-                </Grid>      
+                }
+                {/* </Grid>       */}
             </ListItem>
-            <Collapse in={open} timeout={"auto"} unmountOnExit>
-                <List component={"div"} disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
-                        <ListItemIcon>
-                            <StarBorder />
-                        </ListItemIcon>
-                        <ListItemText primary={"Starred"} />
-                    </ListItemButton>
-                </List>
-            </Collapse>
+            {subItems.length > 0 &&
+             <Collapse in={open} timeout={"auto"} unmountOnExit>
+                 <List component={"div"} disablePadding>
+                     {subItems.map(({name, to}) => {
+                         const link = () => { 
+                             setOpen(false);
+                             dispatch(openDrawer(false));
+                             to && navigate(to);
+                         };
+
+                         return (
+                             <ListItemButton component={ListItemButton} onClick={link} sx={{ pl: 4 }}>
+                                 <ListItemIcon>
+                                     <StarBorder />
+                                 </ListItemIcon>
+                                 <ListItemText primary={name} />
+                             </ListItemButton>
+                         );
+                     })}
+                 </List>
+             </Collapse>}
         </Box>
 
     );
