@@ -1,12 +1,12 @@
 import { screen } from "@testing-library/react";
 import { render } from "../../../utils/__testUtils__/customRender";
-import Statistics from "../Statistics";
+import Profile from "../Profile";
 
-describe("Statistics Page Tests", () => {
+describe("Profile Page Tests", () => {
     it("Should find the heading", () => {
-        render(<Statistics />);
+        render(<Profile />);
 
-        const heading = screen.getByRole("heading", { name: "Statistics" });
+        const heading = screen.getByRole("heading", { name: "Profile" });
 
         expect(heading).toBeInTheDocument();
     });

@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 
-describe("Unauthorized Page Tests", () => {
-    it("Should find the heading", () => {
+describe("AppBreadcrumb Tests", () => {
+    it("Should render", () => {
         expect(true).toBe(true);
     });
 });

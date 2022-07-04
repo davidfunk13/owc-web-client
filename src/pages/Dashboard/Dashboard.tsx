@@ -1,15 +1,20 @@
-import { Typography } from "@mui/material";
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
+import { Breadcrumb } from "../../types/IBreadcrumb";
 
-interface DashboardProps { }
+interface IDashboard { }
 
-const Dashboard: FC<DashboardProps> = () => {
+const breadcrumbs: Breadcrumb[] = [
+    {
+        name: "Dashboard",
+        bold: true
+    },
+];
+
+const Dashboard: FC<IDashboard> = () => {
     return (
-        <ViewProvider>
-            <Typography variant={"h1"}>
-                {"Dashboard"}
-            </Typography>
+        <ViewProvider heading={"Dashboard"} breadcrumbs={breadcrumbs}>
+          
         </ViewProvider>
     );
 };

@@ -1,7 +1,13 @@
 import { screen } from "@testing-library/react";
+import { render } from "../../../utils/__testUtils__/customRender";
+import TrackGames from "../TrackGames";
 
 describe("Track Games Page Tests", () => {
     it("Should find the heading", () => {
-        expect(true).toBe(true);
+        render(<TrackGames />);
+
+        const heading = screen.getByRole("heading", { name: "Track Games" });
+
+        expect(heading).toBeInTheDocument();
     });
 });

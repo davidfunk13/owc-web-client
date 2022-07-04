@@ -2,21 +2,21 @@ import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import { Breadcrumb } from "../../types/IBreadcrumb";
 
-interface MapsProps { }
+interface ICompositionBuilder { }
 
 const breadcrumbs: Breadcrumb[] = [
     {
-        name: "Maps",
+        name: "Team Composition Builder",
         bold: true
     },
 ];
 
-const Maps: FC<MapsProps> = () => {
+const CompositionBuilder: FC<ICompositionBuilder> = () => {
     return (
-        <ViewProvider heading={"Maps"} breadcrumbs={breadcrumbs}>
-
+        <ViewProvider heading={"Team Composition Builder"} breadcrumbs={breadcrumbs}>
+          
         </ViewProvider>
     );
 };
 
-export default Maps;
+export default CompositionBuilder;

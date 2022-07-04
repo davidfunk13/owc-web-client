@@ -1,15 +1,19 @@
-import { Typography } from "@mui/material";
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
+import { Breadcrumb } from "../../types/IBreadcrumb";
 
 interface PageNotFoundProps { }
 
+const breadcrumbs: Breadcrumb[] = [
+    {
+        name: "404 Page Not Found",
+        bold: true
+    },
+];
+
 const PageNotFound: FC<PageNotFoundProps> = () => {
     return (
-        <ViewProvider>
-            <Typography variant={"h1"}>
-                {"404 Page Not Found"}
-            </Typography>
+        <ViewProvider heading={"404 Page Not Found"} breadcrumbs={breadcrumbs}>
         </ViewProvider>
     );
 };

@@ -1,15 +1,15 @@
-import { Typography } from "@mui/material";
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
+import { Breadcrumb } from "../../types/IBreadcrumb";
 
 interface HomeProps { }
 
+const breadcrumbs: Breadcrumb[] = [];
+
 const Home: FC<HomeProps> = () => {
     return (
-        <ViewProvider>
-            <Typography variant={"h1"}>
-                {"Home"}
-            </Typography>
+        <ViewProvider heading={"Home"} breadcrumbs={breadcrumbs}>
+
         </ViewProvider>
     );
 };

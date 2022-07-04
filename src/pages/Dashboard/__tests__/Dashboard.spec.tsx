@@ -1,7 +1,13 @@
 import { screen } from "@testing-library/react";
+import { render } from "../../../utils/__testUtils__/customRender";
+import Dashboard from "../Dashboard";
 
 describe("Dashboard Page Tests", () => {
     it("Should find the heading", () => {
-        expect(true).toBe(true);
+        render(<Dashboard />);
+
+        const heading = screen.getByRole("heading", { name: "Dashboard" });
+
+        expect(heading).toBeInTheDocument();
     });
 });

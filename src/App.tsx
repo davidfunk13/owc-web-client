@@ -14,7 +14,7 @@ import MobileDrawer from "./components/MobileDrawer/MobileDrawer";
 import navItems from "./utils/navItems";
 import { selectIsAuthenticated, setIsAuthenticated, setUser } from "./app/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
-import AddBattletag from "./pages/AddBattletag/AddBatteltag";
+import AddBattletag from "./pages/AddBattletag/AddBattletag";
 
 interface AppProps { }
 
