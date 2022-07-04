@@ -1,6 +1,7 @@
 {
   "name": "owc-web-client",
   "version": "0.1.0",
+  "proxy": "http://localhost:3001",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.10.1",

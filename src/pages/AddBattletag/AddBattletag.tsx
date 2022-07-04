@@ -1,10 +1,9 @@
-import { Box, Grid, TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { FC, SyntheticEvent } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import * as Yup from "yup";
 import { Breadcrumb } from "../../types/IBreadcrumb";
-
 import { LoadingButton } from "@mui/lab";
 
 interface IAddBattletag { }
@@ -45,6 +44,8 @@ const AddBattletag: FC<IAddBattletag> = () => {
         handleSubmit();
     }
 
+
+
     return (
         <ViewProvider heading={"Add Battletag"} breadcrumbs={breadcrumbs}>
             <Grid item xs={12}>
@@ -66,13 +67,16 @@ const AddBattletag: FC<IAddBattletag> = () => {
                         variant={"contained"}
                         size={"large"}
                         type={"submit"}
-                        loading={false}
-                        disabled={false}
+                    // loading={isLoa0ding}
+                    // disabled={isLoading}
                     >
                         {"Submit"}
                     </LoadingButton>
                 </Grid>
             </Grid>
+            {/* <Grid item xs={12}>
+                <ListTable data={data || []} columns={BattletagTableColumns} rowCount={data?.length || 0} page={1} pageSize={100} isLoading={isLoading} / >
+            </Grid> */}
         </ViewProvider>
     );
 };

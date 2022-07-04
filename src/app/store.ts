@@ -4,10 +4,12 @@ import drawerReducer from "./features/drawer/drawerSlice";
 import snackbarReducer from "./features/snackbar/snackbarSlice";
 import themeReducer from "./features/theme/themeSlice";
 import authReducer from "./features/auth/authSlice";
+import battletagReducer from "./features/battletag/battletagSlice";
 
 export const store = configureStore({
     reducer: {
         auth: authReducer,
+        battletags: battletagReducer,
         counter: counterReducer,
         drawer: drawerReducer,
         snackbar: snackbarReducer,
