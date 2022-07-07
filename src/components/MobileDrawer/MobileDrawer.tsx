@@ -9,7 +9,6 @@ import navItems from "../../utils/navItems";
 import NavigationItem from "../NavigationItem/NavigationItem";
 // import useStyles from "./MobileDrawer.styles";
 
-
 interface MobileDrawerProps { }
 
 const MobileDrawer: FC<MobileDrawerProps> = () => {
@@ -24,7 +23,7 @@ const MobileDrawer: FC<MobileDrawerProps> = () => {
             dispatch(openDrawer(false));
         };
     }, [dispatch]);
-
+    
     return (
         <Box component={"nav"}>
             <Drawer
@@ -39,19 +38,14 @@ const MobileDrawer: FC<MobileDrawerProps> = () => {
                 <Divider />
                 <List>
                     {navItems.map(({ name, to, IconComponent, subItems }, index) =>
-                        <Box>
-
-                            <NavigationItem
-                                key={`nav-item-${index}-${name}`}
-                                aria-label={`${name} Navgation Link`}
-                                to={to}
-                                name={name}
-                                IconComponent={IconComponent}
-                                subItems={subItems}
-                            />
-                        </Box>
-
-                        //sub items here.
+                        <NavigationItem
+                            key={`nav-item-${index}-${name}`}
+                            aria-label={`${name} Navgation Link`}
+                            to={to}
+                            name={name}
+                            IconComponent={IconComponent}
+                            subItems={subItems}
+                        />
                     )}
                 </List>
             </Drawer>

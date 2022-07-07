@@ -2,6 +2,8 @@ import { Grid, Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { FC, ReactNode } from "react";
 import { useLocation } from "react-router-dom";
+import { selectIsAuthenticated } from "../../app/features/auth/authSlice";
+import { useAppSelector } from "../../app/hooks";
 import AppBreadcrumbs from "../../components/ AppBreadcrumbs/AppBreadcrumbs";
 import AppSnackbar from "../../components/AppSnackbar/AppSnackbar";
 import { Breadcrumb } from "../../types/IBreadcrumb";
@@ -16,6 +18,7 @@ interface ViewProviderProps {
 const ViewProvider: FC<ViewProviderProps> = ({ children, heading, breadcrumbs }: ViewProviderProps) => {
     const { classes } = useStyles();
     const location = useLocation();
+    const isAuthed = useAppSelector(selectIsAuthenticated);
 
     return (
         <Box component={"main"} className={classes.container}>
@@ -27,7 +30,7 @@ const ViewProvider: FC<ViewProviderProps> = ({ children, heading, breadcrumbs }:
                     </Typography>
                 </Grid>
                 {
-                    !(location.pathname === "/") &&
+                    !(location.pathname === "/") && isAuthed &&
                     <Grid item xs={12}>
                         <AppBreadcrumbs breadcrumbs={breadcrumbs} />
                     </Grid>

@@ -18,7 +18,6 @@ const NavigationItem: FC<NavigationItemProps> = ({ name, IconComponent, to, subI
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const drawerOpen = useAppSelector(selectDrawerOpen);
     
     const link = () => {
         to && navigate(to);
@@ -34,7 +33,6 @@ const NavigationItem: FC<NavigationItemProps> = ({ name, IconComponent, to, subI
     return (
         <Box>
             <ListItem component={ListItemButton} onClick={link}> 
-                {/* <Grid container> */}
                 {IconComponent && <ListItemIcon><IconComponent /> </ListItemIcon>}
                 <ListItemText primary={name} />
                 {subItems.length > 0 && 
@@ -42,7 +40,6 @@ const NavigationItem: FC<NavigationItemProps> = ({ name, IconComponent, to, subI
                         {open ? <ExpandLess /> : <ExpandMore />}
                     </IconButton>
                 }
-                {/* </Grid>       */}
             </ListItem>
             {subItems.length > 0 &&
              <Collapse in={open} timeout={"auto"} unmountOnExit>
@@ -55,7 +52,7 @@ const NavigationItem: FC<NavigationItemProps> = ({ name, IconComponent, to, subI
                          };
 
                          return (
-                             <ListItemButton component={ListItemButton} onClick={link} sx={{ pl: 4 }}>
+                             <ListItemButton key={`${name}-sub-item`} component={ListItemButton} onClick={link} sx={{ pl: 4 }}>
                                  <ListItemIcon>
                                      <StarBorder />
                                  </ListItemIcon>

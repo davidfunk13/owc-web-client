@@ -14,7 +14,7 @@ import MobileDrawer from "./components/MobileDrawer/MobileDrawer";
 import navItems from "./utils/navItems";
 import { selectIsAuthenticated, setIsAuthenticated, setUser } from "./app/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
-import AddBattletag from "./pages/AddBattletag/AddBattletag";
+import createRoutes from "./utils/createRoutes";
 
 interface AppProps { }
 
@@ -34,9 +34,9 @@ const App: FC<AppProps> = () => {
             dispatch(setIsAuthenticated(false));
             dispatch(setUser(undefined));
         };
-        
-    }, [dispatch, isAuthenticated, user]);
 
+    }, [dispatch, isAuthenticated, user]);
+    
     return (
         <BrowserRouter>
             <Box className={classes.container}>
@@ -45,11 +45,8 @@ const App: FC<AppProps> = () => {
                     <>
                         {desktopDrawerBreakpoint ? <DesktopDrawer /> : <MobileDrawer />}
                         <Routes>
-                            <Route path={"/"} element={<Home />}></Route>
-                            <Route path={"/profile/add-battletag"} element={<AddBattletag />}></Route>
-                            {navItems.map(({ to, Page }, index) =>
-                                <Route key={`route-${index}`} path={to} element={<Page />} />
-                            )}
+                            <Route path={"/"} element={<Home />} />
+                            {createRoutes()}
                             <Route path={"*"} element={<PageNotFound />} />
                         </Routes>
                     </>

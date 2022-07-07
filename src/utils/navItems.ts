@@ -23,7 +23,7 @@ const navItems: INavigationItem[] = [
     { name: "Dashboard", IconComponent: DashboardIcon, to: "/dashboard", Page: Dashboard, subItems: [] },
     {
         name: "Profile", IconComponent: AccountCircleIcon, to: "/profile", Page: Profile, subItems: [
-            { name: "Add Battletag", to: "/profile/add-batttletag", Page: AddBattletag, subItems: [] },
+            { name: "Add Battletag", to: "/profile/add-battletag", Page: AddBattletag, subItems: [] },
         ]
     },
     { name: "Heroes", IconComponent: LocalHospitalIcon, to: "/heroes", Page: Heroes, subItems: [] },
