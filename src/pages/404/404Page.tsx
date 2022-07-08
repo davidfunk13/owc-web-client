@@ -2,7 +2,7 @@ import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import { Breadcrumb } from "../../types/IBreadcrumb";
 
-interface PageNotFoundProps { }
+interface IPageNotFound { }
 
 const breadcrumbs: Breadcrumb[] = [
     {
@@ -11,7 +11,7 @@ const breadcrumbs: Breadcrumb[] = [
     },
 ];
 
-const PageNotFound: FC<PageNotFoundProps> = () => {
+const PageNotFound: FC<IPageNotFound> = () => {
     return (
         <ViewProvider heading={"404 Page Not Found"} breadcrumbs={breadcrumbs}>
         </ViewProvider>

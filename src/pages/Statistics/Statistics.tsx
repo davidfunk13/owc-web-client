@@ -2,7 +2,7 @@ import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import { Breadcrumb } from "../../types/IBreadcrumb";
 
-interface StatisticsProps { }
+interface IStatistics { }
 
 const breadcrumbs: Breadcrumb[] = [
     {
@@ -11,7 +11,7 @@ const breadcrumbs: Breadcrumb[] = [
     },
 ];
 
-const Statistics: FC<StatisticsProps> = () => {
+const Statistics: FC<IStatistics> = () => {
     return (
         <ViewProvider heading={"Statistics"} breadcrumbs={breadcrumbs}>
         

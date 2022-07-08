@@ -1,17 +1,14 @@
-import { StarBorder } from "@mui/icons-material";
-import { Collapse, Divider, Drawer, List, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import { Divider, Drawer, List, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { FC, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { FC, useEffect } from "react";
 import { openDrawer, selectDrawerOpen } from "../../app/features/drawer/drawerSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import navItems from "../../utils/navItems";
-import NavigationItem from "../NavigationItem/NavigationItem";
+import generateNavItems from "../../utils/generateNavItems";
 // import useStyles from "./MobileDrawer.styles";
 
-interface MobileDrawerProps { }
+interface IMobileDrawer { }
 
-const MobileDrawer: FC<MobileDrawerProps> = () => {
+const MobileDrawer: FC<IMobileDrawer> = () => {
     const drawerOpen = useAppSelector(selectDrawerOpen);
     const dispatch = useAppDispatch();
     const handleDrawerToggle = () => dispatch(openDrawer(!drawerOpen));
@@ -23,7 +20,7 @@ const MobileDrawer: FC<MobileDrawerProps> = () => {
             dispatch(openDrawer(false));
         };
     }, [dispatch]);
-    
+
     return (
         <Box component={"nav"}>
             <Drawer
@@ -37,16 +34,7 @@ const MobileDrawer: FC<MobileDrawerProps> = () => {
                 </Typography>
                 <Divider />
                 <List>
-                    {navItems.map(({ name, to, IconComponent, subItems }, index) =>
-                        <NavigationItem
-                            key={`nav-item-${index}-${name}`}
-                            aria-label={`${name} Navgation Link`}
-                            to={to}
-                            name={name}
-                            IconComponent={IconComponent}
-                            subItems={subItems}
-                        />
-                    )}
+                    {generateNavItems()}
                 </List>
             </Drawer>
         </Box>

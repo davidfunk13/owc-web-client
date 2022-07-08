@@ -2,12 +2,12 @@ import { SvgIconTypeMap } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import { FC } from "react";
 
-interface INavigationItem {
+interface IMenuItem {
     name: string,
     IconComponent?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string; }
     to: string
     Page: FC
-    subItems: INavigationItem[]
+    subItems: IMenuItem[]
 }
 
-export default INavigationItem;
+export default IMenuItem;

@@ -2,7 +2,7 @@ import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import { Breadcrumb } from "../../types/IBreadcrumb";
 
-interface UnauthorizedProps { }
+interface IUnauthorized { }
 
 const breadcrumbs: Breadcrumb[] = [
     {
@@ -11,11 +11,12 @@ const breadcrumbs: Breadcrumb[] = [
     },
 ];
 
-const Unauthorized: FC<UnauthorizedProps> = () => {
+const Unauthorized: FC<IUnauthorized> = () => {
     return (
         <ViewProvider heading={"Unauthorized"} breadcrumbs={breadcrumbs}>
 
         </ViewProvider>
     );
 };
+
 export default Unauthorized;

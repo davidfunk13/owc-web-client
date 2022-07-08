@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom";
-import INavigationItem from "../types/INavigationItem";
+import INavigationItem from "../types/IMenuItem";
 import navItems from "./navItems";
 
 

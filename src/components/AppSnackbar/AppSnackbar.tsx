@@ -3,9 +3,9 @@ import { FC } from "react";
 import { openSnackbar, selectSnackbarMessage, selectSnackbarVariant } from "../../app/features/snackbar/snackbarSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
-interface AppSnackbarProps { }
+interface IAppSnackbar { }
 
-const AppSnackbar: FC<AppSnackbarProps> = () => {
+const AppSnackbar: FC<IAppSnackbar> = () => {
     const dispatch = useAppDispatch();
     const snackbarMessage = useAppSelector(selectSnackbarMessage);
     const snackbarVariant = useAppSelector(selectSnackbarVariant);

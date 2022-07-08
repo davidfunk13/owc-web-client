@@ -2,7 +2,7 @@ import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import { Breadcrumb } from "../../types/IBreadcrumb";
 
-interface TrackGamesProps { }
+interface ITrackGames { }
 
 const breadcrumbs: Breadcrumb[] = [
     {
@@ -11,7 +11,7 @@ const breadcrumbs: Breadcrumb[] = [
     },
 ];
 
-const TrackGames: FC<TrackGamesProps> = () => {
+const TrackGames: FC<ITrackGames> = () => {
     return (
         <ViewProvider heading={"Track Games"} breadcrumbs={breadcrumbs}>
      

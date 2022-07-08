@@ -2,7 +2,7 @@ import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import { Breadcrumb } from "../../types/IBreadcrumb";
 
-interface MapsProps { }
+interface IMaps { }
 
 const breadcrumbs: Breadcrumb[] = [
     {
@@ -11,7 +11,7 @@ const breadcrumbs: Breadcrumb[] = [
     },
 ];
 
-const Maps: FC<MapsProps> = () => {
+const Maps: FC<IMaps> = () => {
     return (
         <ViewProvider heading={"Maps"} breadcrumbs={breadcrumbs}>
 

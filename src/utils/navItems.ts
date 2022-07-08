@@ -1,6 +1,6 @@
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
-import INavigationItem from "../types/INavigationItem";
+import INavigationItem from "../types/IMenuItem";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Heroes from "../pages/Heroes/Heroes";
 import Maps from "../pages/Maps/Maps";

@@ -8,9 +8,9 @@ import useStyles from "./UserMenu.styles";
 import { useAuth0, User } from "@auth0/auth0-react";
 import Box from "@mui/material/Box";
 
-interface UserMenuProps { user?: User }
+interface IUserMenu { user?: User }
 
-const UserMenu: FC<UserMenuProps & Pick<BoxProps, "p" | "pr">> = ({ user, p, pr }) => {
+const UserMenu: FC<IUserMenu & Pick<BoxProps, "p" | "pr">> = ({ user, p, pr }) => {
     const { classes } = useStyles();
     const dispatch = useAppDispatch();
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -20,10 +20,7 @@ const UserMenu: FC<UserMenuProps & Pick<BoxProps, "p" | "pr">> = ({ user, p, pr 
     const origin: PopoverOrigin = { vertical: "top", horizontal: "right" };
     const CurrentThemeIcon = isDark ? DarkModeIcon : Brightness5;
     const { logout } = useAuth0();
-    const {
-        picture,
-        given_name
-    } = user as User;
+    const { picture, given_name } = user as User;
 
     return (
         <Box p={p} pr={pr}>

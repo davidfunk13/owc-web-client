@@ -2,14 +2,13 @@ import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemButton, Toolbar,
 import { Box } from "@mui/system";
 import { FC } from "react";
 import useStyles from "./DesktopDrawer.styles";
-import navItems from "../../utils/navItems";
 import { LogoutOutlined } from "@mui/icons-material";
 import { useAuth0 } from "@auth0/auth0-react";
-import NavigationItem from "../NavigationItem/NavigationItem";
+import generateNavItems from "../../utils/generateNavItems";
 
-interface DesktopDrawerProps { }
+interface IDesktopDrawer { }
 
-const DesktopDrawer: FC<DesktopDrawerProps & BoxProps> = () => {
+const DesktopDrawer: FC<IDesktopDrawer & BoxProps> = () => {
     const { classes } = useStyles();
     const { logout } = useAuth0();
 
@@ -20,16 +19,7 @@ const DesktopDrawer: FC<DesktopDrawerProps & BoxProps> = () => {
             <Toolbar />
             <Box className={classes.navListOverFlow}>
                 <List>
-                    {navItems.map(({ name, to, IconComponent, subItems }, index) =>
-                        <NavigationItem
-                            key={`nav-item-${index}-${name}`}
-                            subItems={subItems}
-                            aria-label={`${name} Navgation Link`}
-                            to={to}
-                            name={name}
-                            IconComponent={IconComponent}
-                        />
-                    )}
+                    {generateNavItems()}
                 </List>
                 <Divider />
                 <List>

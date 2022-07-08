@@ -2,7 +2,7 @@ import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import { Breadcrumb } from "../../types/IBreadcrumb";
 
-interface HeroesProps { }
+interface IHeroes { }
 
 const breadcrumbs: Breadcrumb[] = [
     {
@@ -11,7 +11,7 @@ const breadcrumbs: Breadcrumb[] = [
     },
 ];
 
-const Heroes: FC<HeroesProps> = () => {
+const Heroes: FC<IHeroes> = () => {
     return (
         <ViewProvider heading={"Heroes"} breadcrumbs={breadcrumbs}>
 
