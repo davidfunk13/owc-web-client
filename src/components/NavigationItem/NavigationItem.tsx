@@ -2,7 +2,7 @@ import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
 import { Box, Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { FC, SyntheticEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { openDrawer } from "../../app/features/drawer/drawerSlice";
+import { openDrawer } from "../../features/drawer/drawerSlice";
 import { useAppDispatch } from "../../app/hooks";
 import IMenuItem from "../../types/IMenuItem";
 

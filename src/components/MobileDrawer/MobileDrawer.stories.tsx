@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import StorybookProvider from "../../providers/StorybookProvider/StorybookProvider";
 import { useAppDispatch } from "../../app/hooks";
-import { setIsAuthenticated, setUser } from "../../app/features/auth/authSlice";
+import { setIsAuthenticated, setUser } from "../../features/auth/authSlice";
 import UserMenu from "../UserMenu/UserMenu";
 import MobileDrawer from "./MobileDrawer";
-import { selectDrawerOpen, openDrawer } from "../../app/features/drawer/drawerSlice";
+import { selectDrawerOpen, openDrawer } from "../../features/drawer/drawerSlice";
 
 export default {
     title: "Components/MobileDrawer",

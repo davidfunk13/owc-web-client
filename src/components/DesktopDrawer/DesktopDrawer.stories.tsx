@@ -4,7 +4,7 @@ import StorybookProvider from "../../providers/StorybookProvider/StorybookProvid
 import { useAppDispatch } from "../../app/hooks";
 import UserMenu from "../UserMenu/UserMenu";
 import DesktopDrawer from "./DesktopDrawer";
-import { openDrawer } from "../../app/features/drawer/drawerSlice";
+import { openDrawer } from "../../features/drawer/drawerSlice";
 
 export default {
     title: "Components/DesktopDrawer",

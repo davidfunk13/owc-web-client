@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../store";
+import { RootState } from "../../app/store";
 import AuthState from "./AuthState";
 
 export const initialState: AuthState = {

@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { useAppSelector } from "../../app/hooks";
-import { selectDark } from "../../app/features/theme/themeSlice";
+import { selectDark } from "../../features/theme/themeSlice";
 import selectedTheme from "../../utils/selectedTheme";
 
 interface MuiThemeProviderProps {

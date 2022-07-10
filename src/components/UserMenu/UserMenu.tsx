@@ -1,7 +1,7 @@
 import { Avatar, BoxProps, Grid, IconButton, ListItemText, Menu, MenuItem, PopoverOrigin, Tooltip } from "@mui/material";
 import { FC, MouseEvent, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectDark, setDark } from "../../app/features/theme/themeSlice";
+import { selectDark, setDark } from "../../features/theme/themeSlice";
 import { Brightness5, Logout } from "@mui/icons-material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import useStyles from "./UserMenu.styles";

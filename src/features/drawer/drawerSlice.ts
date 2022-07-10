@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../store";
+import { RootState } from "../../app/store";
 import DrawerSliceState from "./DrawerSliceState";
 
 export const initialState: DrawerSliceState = {

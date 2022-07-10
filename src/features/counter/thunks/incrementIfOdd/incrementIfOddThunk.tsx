@@ -1,6 +1,6 @@
 // We can also write thunks by hand, which may contain both sync and async logic.
 
-import { AppThunk } from "../../../../store";
+import { AppThunk } from "../../../../app/store";
 import { incrementByAmount, selectCount } from "../../counterSlice";
 
 // Here's an example of conditionally dispatching actions based on current state.

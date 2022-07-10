@@ -11,7 +11,7 @@ const mockState: CounterSliceSate = {
     status: "idle",
 };
 
-describe("counter reducer", () => {
+describe("Counter reducer", () => {
     it("Should handle initial Counter state", () => {
         expect(counterReducer(undefined, { type: "unknown" })).toEqual(initialCounterState);
     });

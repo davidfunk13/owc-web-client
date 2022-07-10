@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../store";
+import { RootState } from "../../app/store";
 import IBattletagSliceState from "./IBattletagSliceState";
 
 export const initialState: IBattletagSliceState = {
@@ -9,13 +9,8 @@ export const initialState: IBattletagSliceState = {
 export const battletagSlice = createSlice({
     name: "battletag",
     initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        // builder.addCase("");
-    },
+    reducers: {}
 });
-
-export const { } = battletagSlice.actions;
 
 export const selectCount = (state: RootState) => state.counter.value;
 

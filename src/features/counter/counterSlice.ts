@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../store";
+import { RootState } from "../../app/store";
 import CounterState from "./CounterSliceState";
 import incrementThunk from "./thunks/increment/incrementThunk";
 

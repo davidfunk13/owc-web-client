@@ -1,4 +1,4 @@
-import IBattletag from "../../../types/IBattletag";
+import IBattletag from "../../types/IBattletag";
 
 interface IBattletagSliceState{
     battletags: IBattletag[]

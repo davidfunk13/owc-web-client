@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useEffect } from "react";
-import { setSnackbarMessage } from "../../app/features/snackbar/snackbarSlice";
+import { setSnackbarMessage } from "../../features/snackbar/snackbarSlice";
 import { useAppDispatch } from "../../app/hooks";
 import StorybookProvider from "../../providers/StorybookProvider/StorybookProvider";
 import UserMenu from "../UserMenu/UserMenu";

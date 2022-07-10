@@ -2,7 +2,7 @@ import { Grid, Toolbar, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { FC, ReactNode } from "react";
 import { useLocation } from "react-router-dom";
-import { selectIsAuthenticated } from "../../app/features/auth/authSlice";
+import { selectIsAuthenticated } from "../../features/auth/authSlice";
 import { useAppSelector } from "../../app/hooks";
 import AppBreadcrumbs from "../../components/ AppBreadcrumbs/AppBreadcrumbs";
 import AppSnackbar from "../../components/AppSnackbar/AppSnackbar";

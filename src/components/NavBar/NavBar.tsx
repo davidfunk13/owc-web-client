@@ -7,8 +7,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { ReactComponent as Ow2Icon } from "../../assets/svg/Ow2Logo.svg";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { openDrawer, selectDrawerOpen } from "../../app/features/drawer/drawerSlice";
-import { selectIsAuthenticated, selectUser } from "../../app/features/auth/authSlice";
+import { openDrawer, selectDrawerOpen } from "../../features/drawer/drawerSlice";
+import { selectIsAuthenticated, selectUser } from "../../features/auth/authSlice";
 
 interface INavBar { }
 

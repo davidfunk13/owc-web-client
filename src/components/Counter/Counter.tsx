@@ -6,10 +6,10 @@ import {
     increment,
     incrementByAmount,
     selectCount,
-} from "../../app/features/counter/counterSlice";
+} from "../../features/counter/counterSlice";
 import styles from "./Counter.module.css";
-import incrementIfOdd from "../../app/features/counter/thunks/incrementIfOdd/incrementIfOddThunk";
-import incrementThunk from "../../app/features/counter/thunks/increment/incrementThunk";
+import incrementIfOdd from "../../features/counter/thunks/incrementIfOdd/incrementIfOddThunk";
+import incrementThunk from "../../features/counter/thunks/increment/incrementThunk";
 
 export function Counter() {
     const count = useAppSelector(selectCount);

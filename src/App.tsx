@@ -11,8 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import { theme } from "./theme/theme";
 import MobileDrawer from "./components/MobileDrawer/MobileDrawer";
-import navItems from "./utils/navItems";
-import { selectIsAuthenticated, setIsAuthenticated, setUser } from "./app/features/auth/authSlice";
+import { selectIsAuthenticated, setIsAuthenticated, setUser } from "./features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import createRoutes from "./utils/createRoutes";
 

@@ -1,6 +1,6 @@
 import { Alert, Snackbar } from "@mui/material";
 import { FC } from "react";
-import { openSnackbar, selectSnackbarMessage, selectSnackbarVariant } from "../../app/features/snackbar/snackbarSlice";
+import { openSnackbar, selectSnackbarMessage, selectSnackbarVariant } from "../../features/snackbar/snackbarSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 interface IAppSnackbar { }

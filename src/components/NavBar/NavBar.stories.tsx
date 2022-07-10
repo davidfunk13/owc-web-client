@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import StorybookProvider from "../../providers/StorybookProvider/StorybookProvider";
 import { useAppDispatch } from "../../app/hooks";
 import NavBar from "./NavBar";
-import { setIsAuthenticated, setUser } from "../../app/features/auth/authSlice";
+import { setIsAuthenticated, setUser } from "../../features/auth/authSlice";
 import UserMenu from "../UserMenu/UserMenu";
 
 export default {

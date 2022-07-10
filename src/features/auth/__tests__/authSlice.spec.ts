@@ -5,7 +5,7 @@ import AuthState from "../AuthState";
 
 const mockState: AuthState = {
     isAuthenticated: false,
-    user: null
+    user: undefined
 };
 
 describe("counter reducer", () => {

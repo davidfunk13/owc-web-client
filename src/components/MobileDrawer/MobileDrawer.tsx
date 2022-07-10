@@ -1,7 +1,7 @@
 import { Divider, Drawer, List, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { FC, useEffect } from "react";
-import { openDrawer, selectDrawerOpen } from "../../app/features/drawer/drawerSlice";
+import { openDrawer, selectDrawerOpen } from "../../features/drawer/drawerSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import generateNavItems from "../../utils/generateNavItems";
 // import useStyles from "./MobileDrawer.styles";
