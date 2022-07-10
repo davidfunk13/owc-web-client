@@ -6,7 +6,7 @@ describe("Profile Page Tests", () => {
     it("Should find the heading", () => {
         render(<Profile />);
 
-        const heading = screen.getByRole("heading", { name: "Profile" });
+        const heading = screen.getByRole("heading", { level: 1, name: /profile/i });
 
         expect(heading).toBeInTheDocument();
     });

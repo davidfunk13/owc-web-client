@@ -6,7 +6,7 @@ describe("Maps Page Tests", () => {
     it("Should find the heading", () => {
         render(<Maps />);
 
-        const heading = screen.getByRole("heading", { name: "Maps" });
+        const heading = screen.getByRole("heading", { level: 1, name: /maps/i });
 
         expect(heading).toBeInTheDocument();
     });

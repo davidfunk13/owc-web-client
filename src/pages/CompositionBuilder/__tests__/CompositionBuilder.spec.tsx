@@ -6,8 +6,7 @@ describe("Composition Builder Page Tests", () => {
     it("Should find the heading", () => {
         render(<CompositionBuilder />);
 
-        const heading = screen.getByRole("heading", { name: "Team Composition Builder" });
-
+        const heading = screen.getByRole("heading", { level: 1, name: /team composition builder/i });
         expect(heading).toBeInTheDocument();
     });
 });

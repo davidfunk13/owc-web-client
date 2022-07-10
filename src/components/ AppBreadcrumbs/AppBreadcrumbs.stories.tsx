@@ -1,15 +1,14 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import StorybookProvider from "../../providers/StorybookProvider/StorybookProvider";
-import UserMenu from "../UserMenu/UserMenu";
+import mockBreadcrumbs from "../../utils/__testUtils__/mocks/mockBreadcrumbs";
 import AppBreadcrumbs from "./AppBreadcrumbs";
 
 export default {
     title: "Components/AppBreadcrumbs",
     component: AppBreadcrumbs,
     parameters: { layout: "fullscreen", },
-    subcomponents: { UserMenu },
-    args:{
-        variant: ""
+    args: {
+        breadcrumbs: mockBreadcrumbs
     },
     decorators: [
         (Story) =>

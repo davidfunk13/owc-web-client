@@ -3,12 +3,12 @@ import { useFormik } from "formik";
 import { FC, SyntheticEvent } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import * as Yup from "yup";
-import { Breadcrumb } from "../../types/IBreadcrumb";
 import { LoadingButton } from "@mui/lab";
+import IBreadcrumb from "../../types/IBreadcrumb";
 
 interface IAddBattletag { }
 
-const breadcrumbs: Breadcrumb[] = [
+const breadcrumbs: IBreadcrumb[] = [
     {
         name: "Profile",
         linkPath: "/profile"

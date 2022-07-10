@@ -1,10 +1,10 @@
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
-import { Breadcrumb } from "../../types/IBreadcrumb";
+import IBreadcrumb from "../../types/IBreadcrumb";
 
 interface IPageNotFound { }
 
-const breadcrumbs: Breadcrumb[] = [
+const breadcrumbs: IBreadcrumb[] = [
     {
         name: "404 Page Not Found",
         bold: true

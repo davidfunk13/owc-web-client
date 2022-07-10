@@ -6,7 +6,7 @@ describe("Unauthorized Page Tests", () => {
     it("Should find the heading", () => {
         render(<Unauthorized />);
 
-        const heading = screen.getByRole("heading", { name: "Unauthorized" });
+        const heading = screen.getByRole("heading", { level: 1, name: /unauthorized/i });
 
         expect(heading).toBeInTheDocument();
     });

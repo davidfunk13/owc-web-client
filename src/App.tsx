@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import DesktopDrawer from "./components/DesktopDrawer/DesktopDrawer";
 import NavBar from "./components/NavBar/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PageNotFound from "./pages/404/404Page";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Home from "./pages/Home/Home";
 import { FC, useEffect } from "react";
 import useStyles from "./App.styles";

@@ -6,12 +6,12 @@ import { selectIsAuthenticated } from "../../app/features/auth/authSlice";
 import { useAppSelector } from "../../app/hooks";
 import AppBreadcrumbs from "../../components/ AppBreadcrumbs/AppBreadcrumbs";
 import AppSnackbar from "../../components/AppSnackbar/AppSnackbar";
-import { Breadcrumb } from "../../types/IBreadcrumb";
+import IBreadcrumb from "../../types/IBreadcrumb";
 import useStyles from "./ViewProvider.styles";
 
 interface ViewProviderProps {
     children: ReactNode
-    breadcrumbs: Breadcrumb[]
+    breadcrumbs: IBreadcrumb[]
     heading: string
 }
 
@@ -25,9 +25,11 @@ const ViewProvider: FC<ViewProviderProps> = ({ children, heading, breadcrumbs }:
             {/* padding on view that nudges content below navbar. */}
             <Toolbar />
             <Grid container spacing={2}>
-                <Typography component={Grid} xs={12} item variant={"h1"}>
-                    {heading}
-                </Typography>
+                <Grid component={Grid} xs={12} item>
+                    <Typography variant={"h1"}>
+                        {heading}
+                    </Typography>
+                </Grid>
                 {/* if we're not @ root, show breadcrumbs. */}
                 {!(location.pathname === "/") && isAuthed &&
                     <Grid className={classes.breadcrumbPadding} item xs={12}>

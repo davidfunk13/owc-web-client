@@ -1,12 +1,12 @@
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import { NavLink } from "react-router-dom";
-import { Breadcrumb } from "../../types/IBreadcrumb";
+import IBreadcrumb from "../../types/IBreadcrumb";
 
 interface IProfile { }
 
-const breadcrumbs: Breadcrumb[] = [
+const breadcrumbs: IBreadcrumb[] = [
     {
         name: "Profile",
         bold: true

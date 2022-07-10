@@ -1,22 +1,21 @@
 import { FC, ReactElement } from "react";
-import { Breadcrumbs, Typography } from "@mui/material";
+import { Breadcrumbs } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { Breadcrumb } from "../../types/IBreadcrumb";
+import IBreadcrumb from "../../types/IBreadcrumb";
+import Crumb from "./Crumb/Crumb";
 
 interface IAppBreadcrumbs {
-    breadcrumbs: Breadcrumb[];
+    breadcrumbs: IBreadcrumb[];
 }
 
 const AppBreadcrumbs: FC<IAppBreadcrumbs> = ({ breadcrumbs }: IAppBreadcrumbs): ReactElement => {
     return (
-        <Breadcrumbs aria-label={"breadcrumb"} data-testid={"app-breadcrumbs"}>
-            <NavLink to={"/"} data-testid={"dashboard-breadcrumb-link"} >
+        <Breadcrumbs aria-label={"breadcrumbs"}>
+            <NavLink to={"/"} aria-label={"home-breadcrumb-link"}>
                 {"Home"}
             </NavLink>
-            {breadcrumbs.map(breadcrumb =>
-                <Typography key={`${breadcrumb.name}-breadcrumb`} component={NavLink} to={breadcrumb.linkPath ?? ""} data-testid={`${breadcrumb.name}-breadcrumb-text`}>
-                    {breadcrumb.name}
-                </Typography>
+            {breadcrumbs.map((crumb, i) =>
+                <Crumb key={`${i}-${crumb.name}`} breadcrumb={crumb} />
             )}
         </Breadcrumbs>
     );
