@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store";
 import IBattletagSliceState from "./IBattletagSliceState";
 
 export const initialState: IBattletagSliceState = {
@@ -11,7 +10,5 @@ export const battletagSlice = createSlice({
     initialState,
     reducers: {}
 });
-
-export const selectCount = (state: RootState) => state.counter.value;
 
 export default battletagSlice.reducer;

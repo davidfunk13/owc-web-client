@@ -1,15 +1,22 @@
 import { FC, ReactElement, ReactNode } from "react";
-import { render, RenderOptions } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import MuiThemeProvider from "../../providers/MuiThemeProvider/MuiThemeProvider";
-import { store } from "../../app/store";
-import { BrowserRouter } from "react-router-dom";
+import { generateStoreWithInitialState, store } from "../../app/store";
+import { BrowserRouter, Router } from "react-router-dom";
+import ICustomRender from "../../types/ICustomRender";
 
-interface CustomProviderWrapperProps { children: ReactNode }
+interface CustomProviderWrapperProps {
+    children: ReactNode
+    initialState?: ICustomRender
+}
 
-const CustomProviderWrapper: FC<CustomProviderWrapperProps> = ({ children }) => {
+
+const TestWrapper: FC<CustomProviderWrapperProps> = ({ children, initialState }) => {
+    const mockStore = initialState ? generateStoreWithInitialState(initialState) : store;
+
     return (
-        <Provider store={store}>
+        <Provider store={mockStore}>
             <MuiThemeProvider>
                 <BrowserRouter>
                     {children}
@@ -19,7 +26,19 @@ const CustomProviderWrapper: FC<CustomProviderWrapperProps> = ({ children }) => 
     );
 };
 
-const customRender = (ui: ReactElement, options?: Omit<RenderOptions, "wrapper">) => render(ui, { wrapper: CustomProviderWrapper, ...options });
+// const customRender = (ui: ReactElement, options?: Omit<RenderOptions, "wrapper">) => render(ui, { wrapper: CustomProviderWrapper, ...options });
+const customRender = (ui: ReactElement, initialState?: ICustomRender) => {
+
+    render(ui, {
+        wrapper: (props) => {
+            const { children } = props;
+
+            return (
+                <TestWrapper initialState={initialState}>{children}</TestWrapper>
+            );
+        }
+    });
+};
 
 export * from "@testing-library/react";
 export { customRender as render };

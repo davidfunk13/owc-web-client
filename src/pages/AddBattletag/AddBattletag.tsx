@@ -1,10 +1,10 @@
-import { Grid, TextField } from "@mui/material";
-import { useFormik } from "formik";
-import { FC, SyntheticEvent } from "react";
+import { Grid } from "@mui/material";
+import { FC } from "react";
+import ListTable from "../../components/ListTable/ListTable";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
-import * as Yup from "yup";
-import { LoadingButton } from "@mui/lab";
 import IBreadcrumb from "../../types/IBreadcrumb";
+import BattletagSearchForm from "./BattletagSearchForm/BattletagSearchForm";
+import BattletagTableColumns from "./BattletagTableColumns";
 
 interface IAddBattletag { }
 
@@ -20,63 +20,18 @@ const breadcrumbs: IBreadcrumb[] = [
     }
 ];
 
-const battletagSearchSchema = Yup.object()
-    .shape({
-        battletag: Yup.string()
-            .min(2, "Too Short!")
-            .max(50, "Too Long!")
-            .required("Required")
-    });
-
 const AddBattletag: FC<IAddBattletag> = () => {
-
-    const formik = useFormik({
-        initialValues: { battletag: "" },
-        validationSchema: battletagSearchSchema,
-        onSubmit: () => { console.log("yo"); }
-    });
-
-    const { values, handleChange, handleSubmit, errors } = formik;
-
-    function handleOnSubmit(e: SyntheticEvent) {
-        e.preventDefault();
-        e.stopPropagation();
-        handleSubmit();
-    }
-
-
 
     return (
         <ViewProvider heading={"Add Battletag"} breadcrumbs={breadcrumbs}>
-            <Grid item xs={12}>
-                <Grid item xs={12} component={"form"} onSubmit={handleOnSubmit} id={"battletag-search"}>
-                    <TextField
-                        helperText={errors.battletag}
-                        error={!!errors.battletag}
-                        id={"battletag-search-input"}
-                        label={"Battletag"}
-                        name={"battletag"}
-                        value={values.battletag}
-                        onChange={handleChange}
-                    />
-                </Grid>
+            <Grid container spacing={2}>
                 <Grid item xs={12}>
-
-                    <LoadingButton
-                        form={"battletag-search"}
-                        variant={"contained"}
-                        size={"large"}
-                        type={"submit"}
-                    // loading={isLoa0ding}
-                    // disabled={isLoading}
-                    >
-                        {"Submit"}
-                    </LoadingButton>
+                    <BattletagSearchForm />
+                </Grid>
+                <Grid item xs={12} style={{ minHeight: "20rem" }}>
+                    <ListTable data={[{id: 1,name:"Dave"}]} columns={BattletagTableColumns} rowCount={0} page={1} pageSize={100} isLoading={true} />
                 </Grid>
             </Grid>
-            {/* <Grid item xs={12}>
-                <ListTable data={data || []} columns={BattletagTableColumns} rowCount={data?.length || 0} page={1} pageSize={100} isLoading={isLoading} / >
-            </Grid> */}
         </ViewProvider>
     );
 };

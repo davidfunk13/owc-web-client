@@ -25,7 +25,7 @@ const BattletagTableColumns = [
     {
         field: "name",
         headerName: "Name",
-        width: 180,
+        minWidth: 180,
         flex: 1,
     },
     {
