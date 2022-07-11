@@ -1,10 +1,10 @@
 import { Grid } from "@mui/material";
 import { FC } from "react";
-import ListTable from "../../components/ListTable/ListTable";
+import BattletagCard from "../../components/BatttletagCard/BattletagCard";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import IBreadcrumb from "../../types/IBreadcrumb";
 import BattletagSearchForm from "./BattletagSearchForm/BattletagSearchForm";
-import BattletagTableColumns from "./BattletagTableColumns";
+import IBattletag from "../../types/IBattletag";
 
 interface IAddBattletag { }
 
@@ -29,7 +29,7 @@ const AddBattletag: FC<IAddBattletag> = () => {
                     <BattletagSearchForm />
                 </Grid>
                 <Grid item xs={12} style={{ minHeight: "20rem" }}>
-                    <ListTable data={[{id: 1,name:"Dave"}]} columns={BattletagTableColumns} rowCount={0} page={1} pageSize={100} isLoading={true} />
+                    <BattletagCard battletag={{} as IBattletag} />
                 </Grid>
             </Grid>
         </ViewProvider>
