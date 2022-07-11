@@ -45,6 +45,7 @@
     "coveragePathIgnorePatterns": [
       ".stories.*",
       "src/types",
+      "src/App.tsx",
       "src/utils/createRoutes.ts",
       "src/customTestQueries.ts",
       "src/providers",
