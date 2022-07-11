@@ -2,6 +2,8 @@
 import { createTheme, responsiveFontSizes } from "@mui/material";
 import typographySettings from "./typography/typographySettings";
 
+export const drawerWidth = 240;
+
 const options = { factor: 7 };
 
 export const theme = responsiveFontSizes(createTheme({

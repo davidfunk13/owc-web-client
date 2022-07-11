@@ -36,7 +36,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "cov": "react-scripts test --coverage=true",
+    "cov": "react-scripts test --watchAll=false --coverage=true",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
@@ -44,7 +44,14 @@
   "jest": {
     "coveragePathIgnorePatterns": [
       ".stories.*",
-      "src/types"
+      "src/types",
+      "src/utils/createRoutes.ts",
+      "src/customTestQueries.ts",
+      "src/providers",
+      "src/features/.*?/thunks",
+      ".styles.ts",
+      "src/index.ts",
+      "src/reportWebVitals.ts"
     ]
   },
   "eslintConfig": {
