@@ -3,31 +3,33 @@ import drawerReducer from "../features/drawer/drawerSlice";
 import snackbarReducer from "../features/snackbar/snackbarSlice";
 import themeReducer from "../features/theme/themeSlice";
 import authReducer from "../features/auth/authSlice";
-import battletagReducer from "../features/battletag/battletagSlice";
-
+import { api } from "./services/api";
 
 const rootReducer = {
     auth: authReducer,
-    battletags: battletagReducer,
     drawer: drawerReducer,
     snackbar: snackbarReducer,
-    theme: themeReducer
+    theme: themeReducer,
+    [api.reducerPath]: api.reducer,
 };
 
+
 export const store = configureStore({
-    reducer: rootReducer
+    reducer: rootReducer,
+    middleware: (gDM) => gDM().concat(api.middleware),
 });
 
 export const generateStoreWithInitialState = (initialState: Partial<RootState>) => configureStore({
     reducer: rootReducer,
+    middleware: (gDM) => gDM().concat(api.middleware),
     preloadedState: initialState
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
+    ReturnType,
+    RootState,
+    unknown,
+    Action<string>
 >;

@@ -1,30 +1,27 @@
 import { LoadingButton } from "@mui/lab";
 import { Grid, TextField } from "@mui/material";
 import { useFormik } from "formik";
-import { FC, SyntheticEvent } from "react";
-import FormProvider from "../../../providers/FormProvider/FormProvider";
-import battletagSearchFormValidation from "./battletagSearchFormValidation";
+import { FC } from "react";
+import FormProvider from "../../../../providers/FormProvider/FormProvider";
+import battletagSearchFormValidation from "../battletagSearchFormValidation";
 
-interface IBattletagSearchForm { }
+interface IBattletagSearchForm {
+    onSubmit: (value: string) => void
+    loading?: boolean
+}
 
-const BattletagSearchForm: FC<IBattletagSearchForm> = () => {
+const BattletagSearchForm: FC<IBattletagSearchForm> = ({ onSubmit, loading }) => {
 
     const formik = useFormik({
         initialValues: { battletag: "" },
         validationSchema: battletagSearchFormValidation,
-        onSubmit: () => { console.log("yo"); }
+        onSubmit: (values) => onSubmit(values.battletag)
     });
 
     const { values, handleChange, handleSubmit, errors } = formik;
 
-    function handleOnSubmit(e: SyntheticEvent) {
-        e.preventDefault();
-        e.stopPropagation();
-        handleSubmit();
-    }
-
     return (
-        <FormProvider id={"battletag-search"} handleSubmit={handleOnSubmit}>
+        <FormProvider id={"battletag-search"} handleSubmit={handleSubmit}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <TextField
@@ -38,14 +35,13 @@ const BattletagSearchForm: FC<IBattletagSearchForm> = () => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-
                     <LoadingButton
                         form={"battletag-search"}
                         variant={"contained"}
                         size={"large"}
                         type={"submit"}
-                        loading={false}
-                        disabled={false}
+                        loading={loading}
+                        disabled={loading}
                     >
                         {"Submit"}
                     </LoadingButton>

@@ -28,6 +28,7 @@ export const Template: ComponentStory<typeof MobileDrawer> = (args) => {
         return () => {
             dispatch(openDrawer(false));
         };
-    },[]);
+    },[dispatch]);
+    
     return(<MobileDrawer {...args} />);
 }; 

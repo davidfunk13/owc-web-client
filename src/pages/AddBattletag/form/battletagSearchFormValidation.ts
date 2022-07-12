@@ -7,4 +7,5 @@ const battletagSearchFormValidation = Yup.object()
             .max(50, "Too Long!")
             .required("Required")
     });
+
 export default battletagSearchFormValidation;

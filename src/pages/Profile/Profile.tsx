@@ -2,16 +2,9 @@ import { Button } from "@mui/material";
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import { NavLink } from "react-router-dom";
-import IBreadcrumb from "../../types/IBreadcrumb";
+import breadcrumbs from "./Profile.breadcrumbs";
 
 interface IProfile { }
-
-const breadcrumbs: IBreadcrumb[] = [
-    {
-        name: "Profile",
-        bold: true
-    },
-];
 
 const Profile: FC<IProfile> = () => {
     return (

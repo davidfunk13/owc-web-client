@@ -1,15 +1,8 @@
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
-import IBreadcrumb from "../../types/IBreadcrumb";
+import breadcrumbs from "./CompositionBuilder.breadcrumbs.";
 
 interface ICompositionBuilder { }
-
-const breadcrumbs: IBreadcrumb[] = [
-    {
-        name: "Team Composition Builder",
-        bold: true
-    },
-];
 
 const CompositionBuilder: FC<ICompositionBuilder> = () => {
     return (

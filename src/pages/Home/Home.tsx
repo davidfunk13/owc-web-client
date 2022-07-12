@@ -1,10 +1,8 @@
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
-import IBreadcrumb from "../../types/IBreadcrumb";
+import breadcrumbs from "./Home.breadcrumbs";
 
 interface IHome { }
-
-const breadcrumbs: IBreadcrumb[] = [];
 
 const Home: FC<IHome> = () => {
     return (

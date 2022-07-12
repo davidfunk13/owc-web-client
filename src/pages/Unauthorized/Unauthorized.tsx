@@ -1,15 +1,10 @@
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
-import IBreadcrumb from "../../types/IBreadcrumb";
+import breadcrumbs from "./Unauthorized.breadcrumbs";
 
-interface IUnauthorized { }
-
-const breadcrumbs: IBreadcrumb[] = [
-    {
-        name: "Unauthorized",
-        bold: true
-    },
-];
+interface IUnauthorized { 
+    
+}
 
 const Unauthorized: FC<IUnauthorized> = () => {
     return (

@@ -1,15 +1,8 @@
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
-import IBreadcrumb from "../../types/IBreadcrumb";
+import breadcrumbs from "./TrackGames.breadcrumbs";
 
 interface ITrackGames { }
-
-const breadcrumbs: IBreadcrumb[] = [
-    {
-        name: "Track Games",
-        bold: true
-    },
-];
 
 const TrackGames: FC<ITrackGames> = () => {
     return (

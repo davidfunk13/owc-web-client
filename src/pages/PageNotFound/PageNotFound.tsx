@@ -1,19 +1,13 @@
 import { FC } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
-import IBreadcrumb from "../../types/IBreadcrumb";
+import breadcrumbs from "./PageNotFound.breadcrumbs";
 
 interface IPageNotFound { }
-
-const breadcrumbs: IBreadcrumb[] = [
-    {
-        name: "404 Page Not Found",
-        bold: true
-    },
-];
 
 const PageNotFound: FC<IPageNotFound> = () => {
     return (
         <ViewProvider heading={"404 Page Not Found"} breadcrumbs={breadcrumbs}>
+
         </ViewProvider>
     );
 };

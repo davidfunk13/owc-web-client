@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { GridRenderCellParams } from "@mui/x-data-grid";
 import { FC } from "react";
-import IBattletag from "../../types/IBattletag";
+import IBattletag from "./types/IBattletag";
 
 interface IBattletagTableColumns {
   row: IBattletag
