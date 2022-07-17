@@ -5,7 +5,7 @@ import { api } from "./api";
 
 type BattletagSearchResponse = IPaginatedResponse<IBattletag>
 
-export const battletagSearchApi = api.injectEndpoints({
+export const battletagApi = api.injectEndpoints({
     endpoints: (build) => ({
         searchBattletags: build.query<BattletagSearchResponse, ISearchBattletagQuery>({
             query: ({ battletag, page }) => ({ url: `scrape/battletags/${String(battletag)}/${page}` }),
@@ -20,9 +20,16 @@ export const battletagSearchApi = api.injectEndpoints({
                 return [{ type: "Battletags", id: "LIST" }];
             }
         }),
+        saveBattletag: build.mutation<BattletagSearchResponse, IBattletag>({
+            query: (battletag) => ({
+                url: "/battletag", 
+                method: "post",
+                data: battletag,
+            }),
+        }),
     }),
 });
 
-export const { useSearchBattletagsQuery } = battletagSearchApi;
+export const { useSearchBattletagsQuery, useSaveBattletagMutation } = battletagApi;
 
-export const { endpoints: { searchBattletags } } = battletagSearchApi;
+export const { endpoints: { searchBattletags, saveBattletag } } = battletagApi;

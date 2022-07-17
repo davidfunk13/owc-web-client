@@ -20,23 +20,25 @@ const root = createRoot(container);
 export const muiCache = createCache({ key: "mui", prepend: true });
 
 root.render(
-    <React.StrictMode>
-        <Auth0Provider
-            domain={String(process.env.REACT_APP_AUTH0_DOMAIN)}
-            clientId={String(process.env.REACT_APP_AUTH0_CLIENT_ID)}
-            redirectUri={window.location.origin}
-            cacheLocation={"localstorage"}
-        >
-            <Provider store={store}>
-                <CacheProvider value={muiCache}>
-                    <MuiThemeProvider>
-                        <CssBaseline />
-                        <App />
-                    </MuiThemeProvider>
-                </CacheProvider>
-            </Provider>
-        </Auth0Provider>
-    </React.StrictMode>
+    //ATTENTION: Double render of useeffect in App.tsx is caused by React.StrictMode. This won't run 2x in production.
+    // <React.StrictMode>
+    <Auth0Provider
+        domain={String(process.env.REACT_APP_AUTH0_DOMAIN)}
+        clientId={String(process.env.REACT_APP_AUTH0_CLIENT_ID)}
+        audience={"https://www.overwatch-companion-api.com/"}
+        redirectUri={window.location.origin}
+        cacheLocation={"localstorage"}
+    >
+        <Provider store={store}>
+            <CacheProvider value={muiCache}>
+                <MuiThemeProvider>
+                    <CssBaseline />
+                    <App />
+                </MuiThemeProvider>
+            </CacheProvider>
+        </Provider>
+    </Auth0Provider>
+    // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
