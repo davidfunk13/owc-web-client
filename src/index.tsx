@@ -25,7 +25,7 @@ root.render(
     <Auth0Provider
         domain={String(process.env.REACT_APP_AUTH0_DOMAIN)}
         clientId={String(process.env.REACT_APP_AUTH0_CLIENT_ID)}
-        audience={"https://www.overwatch-companion-api.com/"}
+        audience={String(process.env.REACT_APP_AUDIENCE)}
         redirectUri={window.location.origin}
         cacheLocation={"localstorage"}
     >

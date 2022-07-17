@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Home from "./pages/Home/Home";
-import { FC, useEffect, useMemo } from "react";
+import { FC, useEffect } from "react";
 import useStyles from "./App.styles";
 import { useMediaQuery } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -39,8 +39,6 @@ const App: FC<AppProps> = () => {
                 .then(token => dispatch(setToken(token)));
         }    
     },[dispatch, getAccessTokenSilently, isAuthenticated, token]);
-
-
 
     return (
         <BrowserRouter>

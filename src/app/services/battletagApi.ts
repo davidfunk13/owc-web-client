@@ -20,12 +20,16 @@ export const battletagApi = api.injectEndpoints({
                 return [{ type: "Battletags", id: "LIST" }];
             }
         }),
-        saveBattletag: build.mutation<BattletagSearchResponse, IBattletag>({
-            query: (battletag) => ({
-                url: "/battletag", 
-                method: "post",
-                data: battletag,
-            }),
+        saveBattletag: build.mutation<void, IBattletag>({
+            query(data) {
+                console.log({data});
+                const { id, ...body } = data;
+                return {
+                    url: "battletag",
+                    method: "POST",
+                    body,
+                };
+            },
         }),
     }),
 });
