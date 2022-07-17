@@ -31,23 +31,24 @@ const AddBattletag: FC<IAddBattletag> = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                    {!isFetching && data?.data.map(item =>
-                        <List dense={false}>
-                            <ListItemButton onClick={async() => await saveBattletag(item)}>
-                                <ListItemAvatar>
-                                    <Avatar src={`${process.env.REACT_APP_ICON_BUCKET + item.portrait}.png`} />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary={item.name}
-                                    secondary={item.platform.toUpperCase()}
-                                />
-                                <ListItemText
-                                    primary={"Is Public:"}
-                                    secondary={item.isPublic.toString()}
-                                />
-                            </ListItemButton> 
-                        </List>
-                    )}
+                    {!isFetching &&
+                     data?.data.map(item =>
+                         <List dense={false}>
+                             <ListItemButton onClick={async() => await saveBattletag(item)}>
+                                 <ListItemAvatar>
+                                     <Avatar src={`${process.env.REACT_APP_ICON_BUCKET + item.portrait}.png`} />
+                                 </ListItemAvatar>
+                                 <ListItemText
+                                     primary={item.name}
+                                     secondary={item.platform.toUpperCase()}
+                                 />
+                                 <ListItemText
+                                     primary={"Is Public:"}
+                                     secondary={item.isPublic.toString()}
+                                 />
+                             </ListItemButton> 
+                         </List>
+                     )}
                     {isFetching && <CircularProgress />}
                     {data?.data &&
                         <Pagination
