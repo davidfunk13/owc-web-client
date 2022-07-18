@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { Avatar, CircularProgress, Grid, List, ListItemAvatar, ListItemButton, ListItemText, Pagination, } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { useSaveBattletagMutation, useSearchBattletagsQuery } from "../../app/services/battletagApi";
@@ -10,8 +11,9 @@ interface IAddBattletag { }
 const AddBattletag: FC<IAddBattletag> = () => {
     const [battletag, setBattletag] = useState<string>("");
     const [page, setPage] = useState<number>(1);
-    const { data, isFetching } = useSearchBattletagsQuery({ battletag, page }, { skip: !battletag });
+    const { data, isFetching, } = useSearchBattletagsQuery({ battletag, page }, { skip: !battletag });
     const [saveBattletag, result] = useSaveBattletagMutation();
+    const { user } = useAuth0();
 
     const submitSearch = (battletag: string) => {
         setPage(1);
@@ -32,23 +34,23 @@ const AddBattletag: FC<IAddBattletag> = () => {
 
                 <Grid item xs={12}>
                     {!isFetching &&
-                     data?.data.map(item =>
-                         <List dense={false}>
-                             <ListItemButton onClick={async() => await saveBattletag(item)}>
-                                 <ListItemAvatar>
-                                     <Avatar src={`${process.env.REACT_APP_ICON_BUCKET + item.portrait}.png`} />
-                                 </ListItemAvatar>
-                                 <ListItemText
-                                     primary={item.name}
-                                     secondary={item.platform.toUpperCase()}
-                                 />
-                                 <ListItemText
-                                     primary={"Is Public:"}
-                                     secondary={item.isPublic.toString()}
-                                 />
-                             </ListItemButton> 
-                         </List>
-                     )}
+                        data?.data.map(item =>
+                            <List dense={false}>
+                                <ListItemButton onClick={async () => await saveBattletag({ ...item, userId: user?.sub })}>
+                                    <ListItemAvatar>
+                                        <Avatar src={`${process.env.REACT_APP_ICON_BUCKET + item.portrait}.png`} />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary={item.name}
+                                        secondary={item.platform.toUpperCase()}
+                                    />
+                                    <ListItemText
+                                        primary={"Is Public:"}
+                                        secondary={item.isPublic.toString()}
+                                    />
+                                </ListItemButton>
+                            </List>
+                        )}
                     {isFetching && <CircularProgress />}
                     {data?.data &&
                         <Pagination

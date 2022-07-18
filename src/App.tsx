@@ -25,7 +25,7 @@ const App: FC<AppProps> = () => {
     const isAuthed = useAppSelector(selectIsAuthenticated);
     const token = useAppSelector(selectToken);
     const localUser = useAppSelector(selectUser);
-
+    console.log(user);
     useEffect(()=>{
         if(isAuthenticated && !localUser){
             dispatch(setIsAuthenticated(isAuthenticated));

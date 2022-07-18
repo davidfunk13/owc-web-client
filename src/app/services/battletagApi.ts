@@ -20,9 +20,22 @@ export const battletagApi = api.injectEndpoints({
                 return [{ type: "Battletags", id: "LIST" }];
             }
         }),
+        getAll: build.query<BattletagSearchResponse, ISearchBattletagQuery>({
+            query: (userId) => ({ url: "battletag/all", params: { id: userId } }),
+            providesTags: (result) => {
+                if (result && result.data) {
+                    return [
+                        ...result.data.map(({ id }) => ({ type: "Battletags", id } as const)),
+                        { type: "Battletags", id: "LIST" },
+                    ];
+                }
+
+                return [{ type: "Battletags", id: "LIST" }];
+            }
+        }),
         saveBattletag: build.mutation<void, IBattletag>({
             query(data) {
-                console.log({data});
+                console.log({ data });
                 const { id, ...body } = data;
                 return {
                     url: "battletag",
