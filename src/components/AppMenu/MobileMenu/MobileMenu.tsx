@@ -1,19 +1,17 @@
 import { Divider, Drawer, List, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { FC, useEffect } from "react";
-import { openDrawer, selectDrawerOpen } from "../../features/drawer/drawerSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import generateNavItems from "../../utils/generateNavItems";
-// import useStyles from "./MobileDrawer.styles";
+import { openDrawer, selectDrawerOpen } from "../../../features/drawer/drawerSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import generateNavItems from "../../../utils/generateNavItems";
 
-interface IMobileDrawer { }
+interface IMobileMenu { }
 
-const MobileDrawer: FC<IMobileDrawer> = () => {
+const MobileMenu: FC<IMobileMenu> = () => {
     const drawerOpen = useAppSelector(selectDrawerOpen);
     const dispatch = useAppDispatch();
     const handleDrawerToggle = () => dispatch(openDrawer(!drawerOpen));
     const modalProps = { keepMounted: true }; // Better open performance on mobile.
-    // const { classes } = useStyles();
 
     useEffect(() => {
         return () => {
@@ -41,4 +39,4 @@ const MobileDrawer: FC<IMobileDrawer> = () => {
     );
 };
 
-export default MobileDrawer;
+export default MobileMenu;

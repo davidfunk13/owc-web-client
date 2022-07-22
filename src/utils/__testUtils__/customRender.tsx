@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import MuiThemeProvider from "../../providers/MuiThemeProvider/MuiThemeProvider";
 import { generateStoreWithInitialState, store } from "../../app/store";
-import { BrowserRouter, Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import ICustomRender from "../../types/ICustomRender";
 
 interface CustomProviderWrapperProps {

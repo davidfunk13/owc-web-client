@@ -1,8 +1,8 @@
-import { drawerWidth } from "../../theme/theme";
-import { makeStyles } from "../../utils/makeStyles";
+import { drawerWidth } from "../../../theme/theme";
+import { makeStyles } from "../../../utils/makeStyles";
 
 
-const useStyles = makeStyles({ name: "DesktopDrawer Styles" })((theme) => ({
+const useStyles = makeStyles({ name: "DesktopMenu Styles" })((theme) => ({
     navListOverFlow: {
         overflow: "auto"
     },

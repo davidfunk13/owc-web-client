@@ -8,7 +8,7 @@ interface IUnauthorized {
 
 const Unauthorized: FC<IUnauthorized> = () => {
     return (
-        <ViewProvider heading={"Unauthorized"} breadcrumbs={breadcrumbs}>
+        <ViewProvider heading={"Welcome"} breadcrumbs={breadcrumbs}>
 
         </ViewProvider>
     );

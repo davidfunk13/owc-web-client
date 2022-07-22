@@ -1,9 +1,6 @@
-import React, { useEffect } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import StorybookProvider from "../../providers/StorybookProvider/StorybookProvider";
-import { useAppDispatch } from "../../app/hooks";
 import NavBar from "./NavBar";
-import { setIsAuthenticated, setUser } from "../../features/auth/authSlice";
 import UserMenu from "../UserMenu/UserMenu";
 
 export default {
@@ -19,19 +16,6 @@ export default {
     ]
 } as ComponentMeta<typeof NavBar>;
 
-export const LoggedIn: ComponentStory<typeof NavBar> = (args) => {
-    const dispatch = useAppDispatch();
+export const Template: ComponentStory<typeof NavBar> = (args) => <NavBar {...args} />;
 
-    useEffect(() => {
-        dispatch(setIsAuthenticated(true));
-        dispatch(setUser({ given_name: "Asshole MacPeenus", }));
-        
-        return () => {
-            dispatch(setIsAuthenticated(false));
-        };
-    }, [dispatch]);
-
-    return <NavBar {...args} />;
-};
-
-export const LoggedOut: ComponentStory<typeof NavBar> = (args) => <NavBar {...args} />; 
+export const LoggedOut = Template.bind({});

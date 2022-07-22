@@ -4,7 +4,7 @@ import AuthState from "./AuthState";
 
 export const initialState: AuthState = {
     isAuthenticated: false,
-    token: "",
+    token: undefined,
     user: undefined,
 };
 
@@ -12,12 +12,6 @@ export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        setIsAuthenticated: (state, action) => {
-            state.isAuthenticated = action.payload;
-        },
-        setUser: (state, action) => {
-            state.user = action.payload;
-        },
         setToken: (state, action) => {
             state.token = action.payload;
         }
@@ -25,10 +19,8 @@ export const authSlice = createSlice({
     extraReducers: (builder) => { },
 });
 
-export const { setIsAuthenticated, setUser, setToken } = authSlice.actions;
+export const { setToken } = authSlice.actions;
 
-export const selectIsAuthenticated = (state: RootState) => state.auth.isAuthenticated;
-export const selectUser = (state: RootState) => state.auth.user;
 export const selectToken = (state: RootState) => state.auth.token;
 
 export default authSlice.reducer;

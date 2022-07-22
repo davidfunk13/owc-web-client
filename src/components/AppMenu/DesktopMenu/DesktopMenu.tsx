@@ -1,14 +1,14 @@
 import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemButton, Toolbar, ListItemText, BoxProps } from "@mui/material";
 import { Box } from "@mui/system";
 import { FC } from "react";
-import useStyles from "./DesktopDrawer.styles";
+import useStyles from "./DesktopMenu.styles";
 import { LogoutOutlined } from "@mui/icons-material";
 import { useAuth0 } from "@auth0/auth0-react";
-import generateNavItems from "../../utils/generateNavItems";
+import generateNavItems from "../../../utils/generateNavItems";
 
-interface IDesktopDrawer { }
+interface IDesktopMenu { }
 
-const DesktopDrawer: FC<IDesktopDrawer & BoxProps> = () => {
+const DesktopMenu: FC<IDesktopMenu & BoxProps> = () => {
     const { classes } = useStyles();
     const { logout } = useAuth0();
 
@@ -37,4 +37,4 @@ const DesktopDrawer: FC<IDesktopDrawer & BoxProps> = () => {
     );
 };
 
-export default DesktopDrawer;
+export default DesktopMenu;

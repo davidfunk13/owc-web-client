@@ -1,8 +1,8 @@
 import { screen } from "@testing-library/react";
-import AppDrawer from "../MobileDrawer";
-import { render } from "../../../utils/__testUtils__/customRender";
+import AppDrawer from "../MobileMenu";
+import { render } from "../../../../utils/__testUtils__/customRender";
 
-describe("MobileDrawer Tests", () => {
+describe("MobileMenu Tests", () => {
     it("Should find the heading", () => {
         render(<AppDrawer />);
 

@@ -8,26 +8,23 @@ import { ReactComponent as Ow2Icon } from "../../assets/svg/Ow2Logo.svg";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { openDrawer, selectDrawerOpen } from "../../features/drawer/drawerSlice";
-import { selectIsAuthenticated, selectUser } from "../../features/auth/authSlice";
 
 interface INavBar { }
 
 const NavBar: FC<INavBar> = () => {
     const dispatch = useAppDispatch();
     const { classes, cx } = useStyles();
-    const desktopDrawerBreakpoint = useMediaQuery(theme.breakpoints.up("md"));
+    const desktopMenuBreakpoint = useMediaQuery(theme.breakpoints.up("md"));
     const hideLogoBreakpoint = useMediaQuery(theme.breakpoints.up("sm"));
-    const { loginWithRedirect, logout } = useAuth0();
-    const isAuthed = useAppSelector(selectIsAuthenticated);
-    const user = useAppSelector(selectUser);
-    const handleAuth = () => isAuthed ? logout({ returnTo: window.location.origin }) : loginWithRedirect();
-    const buttonText = isAuthed ? "Logout" : "Log In";
+    const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+    const handleAuth = () => isAuthenticated ? logout({ returnTo: window.location.origin }) : loginWithRedirect();
+    const buttonText = isAuthenticated ? "Logout" : "Log In";
     const drawerOpen = useAppSelector(selectDrawerOpen);
     const handleDrawerToggle = () => dispatch(openDrawer(!drawerOpen));
-    const showHamburger = !desktopDrawerBreakpoint && isAuthed;
+    const showHamburger = !desktopMenuBreakpoint && isAuthenticated;
 
     return (
-        <AppBar className={cx({ [classes.appBar]: desktopDrawerBreakpoint })} >
+        <AppBar className={cx({ [classes.appBar]: desktopMenuBreakpoint })} >
             <Toolbar>
                 {/* only show if authed and we're not on "desktop" */}
                 {showHamburger &&
@@ -50,7 +47,7 @@ const NavBar: FC<INavBar> = () => {
                 >
                     {"Overwatch Companion"}
                 </Typography>
-                {isAuthed && <UserMenu user={user} pr={1} />}
+                {isAuthenticated && <UserMenu user={user} pr={1} />}
                 <Button
                     aria-label={"Login Button"}
                     color={"inherit"}
