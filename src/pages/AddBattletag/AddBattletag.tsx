@@ -1,8 +1,10 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Avatar, CircularProgress, Grid, List, ListItemAvatar, ListItemButton, ListItemText, Pagination, } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSaveBattletagMutation, useSearchBattletagsQuery } from "../../app/services/battletagApi";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
+import IBattletag from "../../types/IBattletag";
 import breadcrumbs from "./AddBattletag.breadcrumbs";
 import BattletagSearchForm from "./form/BattletagSearchForm/BattletagSearchForm";
 
@@ -10,18 +12,26 @@ interface IAddBattletag { }
 
 const AddBattletag: FC<IAddBattletag> = () => {
     const [battletag, setBattletag] = useState<string>("");
+    
     const [page, setPage] = useState<number>(1);
+    
     const { data, isFetching, } = useSearchBattletagsQuery({ battletag, page }, { skip: !battletag });
+    
     const [saveBattletag, result] = useSaveBattletagMutation();
+    
     const { user } = useAuth0();
-
+    
+    const navigate = useNavigate();
+    
     const submitSearch = (battletag: string) => {
         setPage(1);
         setBattletag(battletag);
     };
-    useEffect(() => {
-        console.log({ result });
-    }, [result]);
+    
+    const handleSaveBattletag = async (battletag: IBattletag) => {
+        await saveBattletag({ ...battletag, userId: user?.sub });
+        navigate("/profile");
+    };
 
     const handlePageChange = (page: number) => setPage(page);
 
@@ -33,10 +43,10 @@ const AddBattletag: FC<IAddBattletag> = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-                    {!isFetching &&
-                        data?.data.map(item =>
-                            <List dense={false}>
-                                <ListItemButton onClick={async () => await saveBattletag({ ...item, userId: user?.sub })}>
+                    <List dense={false}>
+                        {!isFetching &&
+                            data?.data.map(item =>
+                                <ListItemButton onClick={() => handleSaveBattletag(item)}>
                                     <ListItemAvatar>
                                         <Avatar src={`${process.env.REACT_APP_ICON_BUCKET + item.portrait}.png`} />
                                     </ListItemAvatar>
@@ -49,8 +59,8 @@ const AddBattletag: FC<IAddBattletag> = () => {
                                         secondary={item.isPublic.toString()}
                                     />
                                 </ListItemButton>
-                            </List>
-                        )}
+                            )}
+                    </List>
                     {isFetching && <CircularProgress />}
                     {data?.data &&
                         <Pagination

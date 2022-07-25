@@ -1,14 +1,13 @@
 import IBattletag from "../../types/IBattletag";
+import IGetAllUserBatteltagsQuery from "../../types/IGetAllUserBattletagsQuery";
 import IPaginatedResponse from "../../types/IPaginatedResponse";
 import ISearchBattletagQuery from "../../types/ISearchBattletagsQuery";
 import { api } from "./api";
 
-type BattletagSearchResponse = IPaginatedResponse<IBattletag>
-
 export const battletagApi = api.injectEndpoints({
-    
+
     endpoints: (build) => ({
-        searchBattletags: build.query<BattletagSearchResponse, ISearchBattletagQuery>({
+        searchBattletags: build.query<IPaginatedResponse<IBattletag>, ISearchBattletagQuery>({
             query: ({ battletag, page }) => ({ url: `scrape/battletags/${String(battletag)}/${page}` }),
             providesTags: (result) => {
                 if (result && result.data) {
@@ -20,14 +19,14 @@ export const battletagApi = api.injectEndpoints({
 
                 return [{ type: "Battletags", id: "SCRAPE LIST" }];
             },
-            
+
         }),
-        getAllBattletags: build.query<BattletagSearchResponse, string | undefined>({
-            query: (userId) => ({ url: "battletag/all", params: { id: userId } }),
+        getAllBattletags: build.query<{ message: string, data: IPaginatedResponse<IBattletag> }, IGetAllUserBatteltagsQuery>({
+            query: ({ userId, page }) => ({ url: `battletag/all/${page}`, params: { id: userId } }),
             providesTags: (result) => {
-                if (result && result.data) {
+                if (result && result.data && result.data.data) {
                     return [
-                        ...result.data.map(({ id }) => ({ type: "Battletags", id } as const)),
+                        ...result.data.data.map(({ id }) => ({ type: "Battletags", id } as const)),
                         { type: "Battletags", id: "LIST" },
                     ];
                 }
@@ -37,7 +36,6 @@ export const battletagApi = api.injectEndpoints({
         }),
         saveBattletag: build.mutation<void, IBattletag>({
             query(data) {
-                console.log({ data });
                 const { id, ...body } = data;
                 return {
                     url: "battletag",
@@ -47,9 +45,18 @@ export const battletagApi = api.injectEndpoints({
             },
             invalidatesTags: [{ type: "Battletags", id: "LIST" }]
         }),
+        deleteBattletag: build.mutation<void, number>({
+            query(id) {
+                return {
+                    url: `battletag/${id}`,
+                    method: "DELETE",
+                };
+            },
+            invalidatesTags: [{ type: "Battletags", id: "LIST" }]
+        }),
     }),
 });
 
-export const { useSearchBattletagsQuery, useGetAllBattletagsQuery, useSaveBattletagMutation } = battletagApi;
+export const { useSearchBattletagsQuery, useGetAllBattletagsQuery, useSaveBattletagMutation, useDeleteBattletagMutation } = battletagApi;
 
-export const { endpoints: { searchBattletags, saveBattletag, getAllBattletags } } = battletagApi;
+export const { endpoints: { searchBattletags, saveBattletag, getAllBattletags, deleteBattletag } } = battletagApi;
