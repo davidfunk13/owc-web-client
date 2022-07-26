@@ -1,8 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Avatar, CircularProgress, Grid, List, ListItemAvatar, ListItemButton, ListItemText, Pagination, } from "@mui/material";
+import { Avatar, CircularProgress, Grid, List, ListItemAvatar, ListItemButton, ListItemText, Pagination, Skeleton, } from "@mui/material";
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSaveBattletagMutation, useSearchBattletagsQuery } from "../../app/services/battletagApi";
+import BattletagList from "../../components/BattletagList/BattletagList";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import IBattletag from "../../types/IBattletag";
 import breadcrumbs from "./AddBattletag.breadcrumbs";
@@ -12,56 +13,40 @@ interface IAddBattletag { }
 
 const AddBattletag: FC<IAddBattletag> = () => {
     const [battletag, setBattletag] = useState<string>("");
-    
+
     const [page, setPage] = useState<number>(1);
-    
+
     const { data, isFetching, } = useSearchBattletagsQuery({ battletag, page }, { skip: !battletag });
-    
+
     const [saveBattletag, result] = useSaveBattletagMutation();
-    
+
     const { user } = useAuth0();
-    
+
     const navigate = useNavigate();
-    
+
     const submitSearch = (battletag: string) => {
         setPage(1);
         setBattletag(battletag);
     };
-    
+
     const handleSaveBattletag = async (battletag: IBattletag) => {
         await saveBattletag({ ...battletag, userId: user?.sub });
         navigate("/profile");
     };
 
     const handlePageChange = (page: number) => setPage(page);
-
+    console.log(data);
+    
     return (
         <ViewProvider heading={"Add Battletag"} breadcrumbs={breadcrumbs}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <BattletagSearchForm onSubmit={submitSearch} loading={isFetching} />
                 </Grid>
-
-                <Grid item xs={12}>
-                    <List dense={false}>
-                        {!isFetching &&
-                            data?.data.map(item =>
-                                <ListItemButton onClick={() => handleSaveBattletag(item)}>
-                                    <ListItemAvatar>
-                                        <Avatar src={`${process.env.REACT_APP_ICON_BUCKET + item.portrait}.png`} />
-                                    </ListItemAvatar>
-                                    <ListItemText
-                                        primary={item.name}
-                                        secondary={item.platform.toUpperCase()}
-                                    />
-                                    <ListItemText
-                                        primary={"Is Public:"}
-                                        secondary={item.isPublic.toString()}
-                                    />
-                                </ListItemButton>
-                            )}
-                    </List>
-                    {isFetching && <CircularProgress />}
+                <Grid minHeight={400} item xs={12}>
+                    {!isFetching && data && <BattletagList clickable={true} itemClick={handleSaveBattletag} battletags={data.data}/>}
+                    {isFetching && <CircularProgress size={100} />}
+                 
                     {data?.data &&
                         <Pagination
                             page={page}

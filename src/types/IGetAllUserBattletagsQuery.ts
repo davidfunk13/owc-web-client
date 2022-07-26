@@ -1,8 +1,8 @@
 import { skipToken } from "@reduxjs/toolkit/dist/query";
 
-interface IGetAllUserBatteltagsQuery {
+interface IGetAllUserBattletagsQuery {
     userId?: string | typeof skipToken
     page?: number
 }
 
-export default IGetAllUserBatteltagsQuery;
+export default IGetAllUserBattletagsQuery;

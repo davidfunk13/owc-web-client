@@ -21,12 +21,12 @@ export const battletagApi = api.injectEndpoints({
             },
 
         }),
-        getAllBattletags: build.query<{ message: string, data: IPaginatedResponse<IBattletag> }, IGetAllUserBatteltagsQuery>({
+        getAllBattletags: build.query<IPaginatedResponse<IBattletag>, IGetAllUserBatteltagsQuery>({
             query: ({ userId, page }) => ({ url: `battletag/all/${page}`, params: { id: userId } }),
             providesTags: (result) => {
-                if (result && result.data && result.data.data) {
+                if (result && result.data) {
                     return [
-                        ...result.data.data.map(({ id }) => ({ type: "Battletags", id } as const)),
+                        ...result.data.map(({ id }) => ({ type: "Battletags", id } as const)),
                         { type: "Battletags", id: "LIST" },
                     ];
                 }
