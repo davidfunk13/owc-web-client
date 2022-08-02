@@ -3,13 +3,15 @@ import drawerReducer from "../features/drawer/drawerSlice";
 import snackbarReducer from "../features/snackbar/snackbarSlice";
 import themeReducer from "../features/theme/themeSlice";
 import authReducer from "../features/auth/authSlice";
-import { api } from "./services/api";
+import { api } from "../services/api";
+import selectedBattletagReducer from "../features/selectedBattletag/selectedBattletagSlice";
 
 const rootReducer = {
     auth: authReducer,
     drawer: drawerReducer,
     snackbar: snackbarReducer,
     theme: themeReducer,
+    selectedBattletag: selectedBattletagReducer,
     [api.reducerPath]: api.reducer,
 };
 

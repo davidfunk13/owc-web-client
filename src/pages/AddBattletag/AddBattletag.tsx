@@ -1,24 +1,29 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Avatar, CircularProgress, Grid, List, ListItemAvatar, ListItemButton, ListItemText, Pagination, Skeleton, } from "@mui/material";
+import { Grid, Pagination} from "@mui/material";
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSaveBattletagMutation, useSearchBattletagsQuery } from "../../app/services/battletagApi";
+import { useSaveBattletagMutation, useSearchBattletagsQuery } from "../../services/battletagApi";
 import BattletagList from "../../components/BattletagList/BattletagList";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import IBattletag from "../../types/IBattletag";
 import breadcrumbs from "./AddBattletag.breadcrumbs";
 import BattletagSearchForm from "./form/BattletagSearchForm/BattletagSearchForm";
+import { useAppDispatch } from "../../app/hooks";
+import { setSnackbarMessage } from "../../features/snackbar/snackbarSlice";
 
 interface IAddBattletag { }
 
 const AddBattletag: FC<IAddBattletag> = () => {
     const [battletag, setBattletag] = useState<string>("");
 
+    const dispatch = useAppDispatch();
+
     const [page, setPage] = useState<number>(1);
 
     const { data, isFetching, } = useSearchBattletagsQuery({ battletag, page }, { skip: !battletag });
 
-    const [saveBattletag, result] = useSaveBattletagMutation();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [saveBattletag, _] = useSaveBattletagMutation();
 
     const { user } = useAuth0();
 
@@ -26,17 +31,20 @@ const AddBattletag: FC<IAddBattletag> = () => {
 
     const submitSearch = (battletag: string) => {
         setPage(1);
+
         setBattletag(battletag);
     };
 
     const handleSaveBattletag = async (battletag: IBattletag) => {
         await saveBattletag({ ...battletag, userId: user?.sub });
+
+        dispatch(setSnackbarMessage("Battletag successfully added to user's profile."));
+
         navigate("/profile");
     };
 
     const handlePageChange = (page: number) => setPage(page);
-    console.log(data);
-    
+
     return (
         <ViewProvider heading={"Add Battletag"} breadcrumbs={breadcrumbs}>
             <Grid container spacing={2}>
@@ -44,20 +52,20 @@ const AddBattletag: FC<IAddBattletag> = () => {
                     <BattletagSearchForm onSubmit={submitSearch} loading={isFetching} />
                 </Grid>
                 <Grid minHeight={400} item xs={12}>
-                    {!isFetching && data && <BattletagList clickable={true} itemClick={handleSaveBattletag} battletags={data.data}/>}
-                    {isFetching && <CircularProgress size={100} />}
-                 
-                    {data?.data &&
-                        <Pagination
-                            page={page}
-                            count={data.pages}
-                            color={"primary"}
-                            onChange={(_, page) => handlePageChange(page)}
-                            onError={(e) => console.log(e)}
-                            size={"large"}
-                            showFirstButton
-                            showLastButton
-                        />
+                    <Grid item xs={12}>
+                        <BattletagList loading={isFetching} battletags={data?.data} itemClick={handleSaveBattletag} />
+                    </Grid>
+                    {!isFetching && !!data?.data.length &&
+                        <Grid container item xs={12} justifyContent={"center"}>
+                            <Pagination
+                                page={page}
+                                count={data.pages}
+                                color={"primary"}
+                                onChange={(_, page) => handlePageChange(page)}
+                                onError={(e) => console.log(e)}
+                                size={"large"}
+                            />
+                        </Grid>
                     }
                 </Grid>
             </Grid>

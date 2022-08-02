@@ -22,8 +22,8 @@ const BattletagSearchForm: FC<IBattletagSearchForm> = ({ onSubmit, loading }) =>
 
     return (
         <FormProvider id={"battletag-search"} handleSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
+            <Grid container spacing={2} alignItems={"center"}>
+                <Grid item>
                     <TextField
                         helperText={errors.battletag}
                         error={!!errors.battletag}
@@ -34,7 +34,7 @@ const BattletagSearchForm: FC<IBattletagSearchForm> = ({ onSubmit, loading }) =>
                         onChange={handleChange}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item>
                     <LoadingButton
                         form={"battletag-search"}
                         variant={"contained"}

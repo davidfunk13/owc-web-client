@@ -1,7 +1,7 @@
-import IBattletag from "../../types/IBattletag";
-import IGetAllUserBatteltagsQuery from "../../types/IGetAllUserBattletagsQuery";
-import IPaginatedResponse from "../../types/IPaginatedResponse";
-import ISearchBattletagQuery from "../../types/ISearchBattletagsQuery";
+import IBattletag from "../types/IBattletag";
+import IGetAllUserBatteltagsQuery from "../types/IGetAllUserBattletagsQuery";
+import IPaginatedResponse from "../types/IPaginatedResponse";
+import ISearchBattletagQuery from "../types/ISearchBattletagsQuery";
 import { api } from "./api";
 
 export const battletagApi = api.injectEndpoints({

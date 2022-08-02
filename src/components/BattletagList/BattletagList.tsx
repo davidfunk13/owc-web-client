@@ -1,27 +1,30 @@
-import { Close } from "@mui/icons-material";
-import { Avatar, Box, IconButton, List, ListItem, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material";
-import { FC } from "react";
+import { Close, Lock, LockOpen } from "@mui/icons-material";
+import { Avatar, CircularProgress, Grid, IconButton, List, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material";
+import { FC, SyntheticEvent } from "react";
 import IBattletag from "../../types/IBattletag";
 
 interface IBattletagListProps {
     dense?: boolean
-    battletags: IBattletag[]
-    clickable?: boolean
-    deletable?: boolean
+    battletags?: IBattletag[]
+    loading?: boolean
     itemClick?: (item: IBattletag) => void
     itemDelete?: (id: number) => void
 }
 
-const BattletagList: FC<IBattletagListProps> = ({ dense, battletags, itemClick, clickable, deletable, itemDelete }) => {
+const BattletagList: FC<IBattletagListProps> = ({ dense, loading, battletags = [], itemClick, itemDelete }) => {
 
-    const handleClickListItem = (item: IBattletag) => {
+    const handleClickListItem = (item: IBattletag, e: SyntheticEvent) => {
+
         if (!itemClick) {
             return;
         }
+
         itemClick(item);
     };
 
-    const handleDeleteListItem = (id: number) => {
+    const handleDeleteListItem = (id: number, e: SyntheticEvent) => {
+        e.stopPropagation();
+
         if (!itemDelete) {
             return;
         }
@@ -29,62 +32,40 @@ const BattletagList: FC<IBattletagListProps> = ({ dense, battletags, itemClick, 
         itemDelete(id);
     };
 
-    const BattletagItemContent = ({ battletag }: { battletag: IBattletag }) => {
-        return <Box>
-            <ListItemText
-                primary={battletag.name}
-                secondary={battletag.platform.toUpperCase()}
-            />
-            <ListItemText
-                primary={"Is Public:"}
-                secondary={battletag.isPublic.toString()}
-            />
-        </Box>;
-    };
-
-    const BattletagAvatar = ({ battletag }: { battletag: IBattletag }) => {
-        return (
-            <ListItemAvatar>
-                <Avatar src={`${process.env.REACT_APP_ICON_BUCKET + battletag.portrait}.png`} />
-            </ListItemAvatar>
-        );
-    };
-
-
-    const ClickableItem = ({ battletag }: { battletag: IBattletag }) => {
-        return (
-            <ListItemButton onClick={() => handleClickListItem(battletag)} >
-                <BattletagAvatar battletag={battletag} />
-                <BattletagItemContent battletag={battletag} />
-            </ListItemButton>
-        );
-    };
-
-    const NonClickableItem = ({ battletag }: { battletag: IBattletag }) => {
-        return (
-            <ListItem>
-                <BattletagAvatar battletag={battletag} />
-                <BattletagItemContent battletag={battletag} />
-            </ListItem>
-        );
-    };
-
-
-    //implement
-    const DeletableItem = ({ battletag }: { battletag: IBattletag }) => {
-        return (
-            <ListItem>
-                <IconButton onClick={() => handleDeleteListItem(battletag.id)}>
-                    <Close />
-                </IconButton>
-            </ListItem>
-        );
-    };
-
-    return (
-        <List dense={false}>
-            {battletags.map(battletag => clickable ? <ClickableItem battletag={battletag} /> : <NonClickableItem battletag={battletag} />)}
-        </List>
-    );
+    return !loading ?
+        <List dense={dense}>
+            {!loading && battletags.map(
+                battletag =>
+                    <ListItemButton onClick={(e) => handleClickListItem(battletag, e)} >
+                        <Grid container justifyItems={"space-evenly"} alignItems={"center"}>
+                            <Grid item xs={2}>
+                                <ListItemAvatar>
+                                    <Avatar src={`${process.env.REACT_APP_ICON_BUCKET + battletag.portrait}.png`} />
+                                </ListItemAvatar>
+                            </Grid>
+                            <Grid container alignItems={"center"} item xs={6}>
+                                <ListItemText
+                                    primary={battletag.name}
+                                    secondary={battletag.platform.toUpperCase()}
+                                />
+                                <Grid item xs={2}>
+                                    {battletag.isPublic ? <Lock /> : <LockOpen />}
+                                </Grid>
+                            </Grid>
+                            {!!itemDelete &&
+                                <Grid item xs={2}>
+                                    <IconButton onClick={(e) => handleDeleteListItem(battletag.id, e)}>
+                                        <Close />
+                                    </IconButton>
+                                </Grid>
+                            }
+                        </Grid>
+                    </ListItemButton>
+            )}
+        </List> 
+        :
+        <Grid container justifyContent={"center"} item xs={12}>
+            <CircularProgress size={100} />
+        </Grid>;
 };
 export default BattletagList;

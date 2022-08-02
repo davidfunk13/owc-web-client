@@ -13,9 +13,9 @@ const useStyles = makeStyles({ name: "Navbar Styles" })((theme) => ({
             padding: theme.spacing(1),
         },
     },
-    appTitle: {
-        flexGrow: 1,
-    },
+    // appTitle: {
+    //     flexGrow: 1,
+    // },
     navItemBox: {
         [theme.breakpoints.up("xs")]: {
             display: "none",

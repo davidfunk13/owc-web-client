@@ -1,11 +1,15 @@
-import { Avatar, Box, Button, CircularProgress, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemButton, ListItemText, Pagination } from "@mui/material";
+import { Button, Grid, Pagination } from "@mui/material";
 import { FC, useState } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import { NavLink } from "react-router-dom";
 import breadcrumbs from "./Profile.breadcrumbs";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDeleteBattletagMutation, useGetAllBattletagsQuery } from "../../app/services/battletagApi";
-import { Close } from "@mui/icons-material";
+import { useDeleteBattletagMutation, useGetAllBattletagsQuery } from "../../services/battletagApi";
+import BattletagList from "../../components/BattletagList/BattletagList";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { selectedBattletag, setSelected } from "../../features/selectedBattletag/selectedBattletagSlice";
+import IBattletag from "../../types/IBattletag";
+import { setSnackbarMessage } from "../../features/snackbar/snackbarSlice";
 
 interface IProfile { }
 
@@ -14,14 +18,32 @@ const Profile: FC<IProfile> = () => {
 
     const [page, setPage] = useState(1);
 
+    const dispatch = useAppDispatch();
+
     const { data, isFetching, } = useGetAllBattletagsQuery({ userId: user?.sub, page });
 
-    const [deleteBattletag, result] = useDeleteBattletagMutation();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [deleteBattletag, _] = useDeleteBattletagMutation();
 
     const handlePageChange = (page: number) => setPage(page);
 
     const handleDeleteBattletag = async (id: number) => {
+        dispatch(setSelected(undefined));
+
         await deleteBattletag(id);
+
+        dispatch(setSnackbarMessage("Battletag removed"));
+    };
+    
+    const globalBattletag = useAppSelector(selectedBattletag);
+
+    const handleSelectBattletag = (b: IBattletag) => {
+
+        dispatch(setSelected(b));
+        
+        if(!globalBattletag){
+            dispatch(setSnackbarMessage(`Battletag ${b.urlName} selected`));
+        }
     };
 
     return (
@@ -30,29 +52,15 @@ const Profile: FC<IProfile> = () => {
                 <Grid item xs={12}>
                     <Button variant={"contained"} component={NavLink} to={"/profile/add-battletag"}>{"Add Battletag"}</Button>
                 </Grid>
-                <Grid item xs={4}>
-                    <List dense={false}>
-                        {data?.data ? data.data.map(data =>
-                            <ListItem key={data.id}>
-                                <ListItemAvatar>
-                                    <Avatar src={`${process.env.REACT_APP_ICON_BUCKET + data.portrait}.png`} />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary={data.name}
-                                    secondary={data.platform.toUpperCase()}
-                                />
-                                <ListItemText
-                                    primary={"Is Public:"}
-                                    secondary={data.isPublic.toString()}
-                                />
-                                <IconButton onClick={() => handleDeleteBattletag(data.id)}>
-                                    <Close />
-                                </IconButton>
-                            </ListItem>
-                        ) :
-                            isFetching ? <CircularProgress size={100} /> : null}
-                    </List>
-                    {data?.data &&
+                <Grid minHeight={400} item xs={12}>
+                    <BattletagList
+                        battletags={data?.data}
+                        loading={isFetching}
+                        itemClick={handleSelectBattletag}
+                        itemDelete={handleDeleteBattletag}
+                    />
+                    {!isFetching && data?.data &&
+                        <Grid container item xs={12} justifyContent={"center"}>
                             <Pagination
                                 page={page}
                                 count={data.pages}
@@ -60,9 +68,8 @@ const Profile: FC<IProfile> = () => {
                                 onChange={(_, page) => handlePageChange(page)}
                                 onError={(e) => console.log(e)}
                                 size={"large"}
-                                showFirstButton
-                                showLastButton
                             />
+                        </Grid>
                     }
                 </Grid>
             </Grid>

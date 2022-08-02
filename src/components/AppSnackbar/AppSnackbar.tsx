@@ -1,6 +1,6 @@
 import { Alert, Snackbar } from "@mui/material";
 import { FC } from "react";
-import { openSnackbar, selectSnackbarMessage, selectSnackbarVariant } from "../../features/snackbar/snackbarSlice";
+import { initialState, selectSnackbarMessage, selectSnackbarVariant, setSnackbarMessage, setSnackbarVariant } from "../../features/snackbar/snackbarSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 interface IAppSnackbar { }
@@ -10,13 +10,18 @@ const AppSnackbar: FC<IAppSnackbar> = () => {
     const snackbarMessage = useAppSelector(selectSnackbarMessage);
     const snackbarVariant = useAppSelector(selectSnackbarVariant);
     const snackbarOpen = !!snackbarMessage;
+    const handleCloseSnackbar = () => {
+        dispatch(setSnackbarVariant(initialState.variant));
+        dispatch(setSnackbarMessage(initialState.message));
+    };
+    
+    ///yooooou need to rework this into a snackbar stack, because its way better looking than having the message change as its closing from the previous timeout..
 
-    const handleCloseSnackbar = () => dispatch(openSnackbar(false));
     return (
         <Snackbar
             data-testid={"snackbar"}
             open={snackbarOpen}
-            autoHideDuration={5000}
+            autoHideDuration={3000}
             anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             onClose={handleCloseSnackbar}
         >

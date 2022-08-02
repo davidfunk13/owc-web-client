@@ -24,8 +24,8 @@ const App: FC<AppProps> = () => {
 
     return (
         <Box>
-            <NavBar />
             <BrowserRouter>
+                <NavBar />
                 {isAuthenticated && token ?
                     <Box>
                         <AppMenu />
