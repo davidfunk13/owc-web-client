@@ -52,7 +52,7 @@ const Profile: FC<IProfile> = () => {
                 <Grid item xs={12}>
                     <Button variant={"contained"} component={NavLink} to={"/profile/add-battletag"}>{"Add Battletag"}</Button>
                 </Grid>
-                <Grid minHeight={400} item xs={12}>
+                <Grid minHeight={400} item xs={12} sm={8} lg={6} xl={4}>
                     <BattletagList
                         battletags={data?.data}
                         loading={isFetching}
@@ -60,7 +60,7 @@ const Profile: FC<IProfile> = () => {
                         itemDelete={handleDeleteBattletag}
                     />
                     {!isFetching && data?.data &&
-                        <Grid container item xs={12} justifyContent={"center"}>
+                        <Grid container item xs={12} >
                             <Pagination
                                 page={page}
                                 count={data.pages}

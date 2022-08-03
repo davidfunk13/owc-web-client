@@ -43,7 +43,7 @@ const BattletagList: FC<IBattletagListProps> = ({ dense, loading, battletags = [
                                     <Avatar src={`${process.env.REACT_APP_ICON_BUCKET + battletag.portrait}.png`} />
                                 </ListItemAvatar>
                             </Grid>
-                            <Grid container alignItems={"center"} item xs={6}>
+                            <Grid container alignItems={"center"} item xs={8}>
                                 <ListItemText
                                     primary={battletag.name}
                                     secondary={battletag.platform.toUpperCase()}

@@ -52,11 +52,10 @@ const AddBattletag: FC<IAddBattletag> = () => {
                     <BattletagSearchForm onSubmit={submitSearch} loading={isFetching} />
                 </Grid>
                 <Grid minHeight={400} item xs={12}>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sm={8} lg={6} xl={4}>
                         <BattletagList loading={isFetching} battletags={data?.data} itemClick={handleSaveBattletag} />
-                    </Grid>
-                    {!isFetching && !!data?.data.length &&
-                        <Grid container item xs={12} justifyContent={"center"}>
+                        {!isFetching && !!data?.data.length &&
+                        <Grid container item xs={12} >
                             <Pagination
                                 page={page}
                                 count={data.pages}
@@ -66,7 +65,8 @@ const AddBattletag: FC<IAddBattletag> = () => {
                                 size={"large"}
                             />
                         </Grid>
-                    }
+                        }
+                    </Grid>
                 </Grid>
             </Grid>
         </ViewProvider>

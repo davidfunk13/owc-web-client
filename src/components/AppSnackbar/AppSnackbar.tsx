@@ -21,7 +21,7 @@ const AppSnackbar: FC<IAppSnackbar> = () => {
         <Snackbar
             data-testid={"snackbar"}
             open={snackbarOpen}
-            autoHideDuration={3000}
+            autoHideDuration={2000}
             anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             onClose={handleCloseSnackbar}
         >
