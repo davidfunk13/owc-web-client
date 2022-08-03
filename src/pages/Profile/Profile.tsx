@@ -1,4 +1,4 @@
-import { Button, Grid, Pagination } from "@mui/material";
+import { Button, Card, Grid, Pagination } from "@mui/material";
 import { FC, useState } from "react";
 import ViewProvider from "../../providers/ViewProvider/ViewProvider";
 import { NavLink } from "react-router-dom";
@@ -52,7 +52,29 @@ const Profile: FC<IProfile> = () => {
                 <Grid item xs={12}>
                     <Button variant={"contained"} component={NavLink} to={"/profile/add-battletag"}>{"Add Battletag"}</Button>
                 </Grid>
-                <Grid minHeight={400} item xs={12} sm={8} lg={6} xl={4}>
+                <Grid item xs={12} sm={8} lg={6} xl={4}>
+                    <Card elevation={0} variant={"outlined"}>
+                        <BattletagList
+                            battletags={data?.data}
+                            loading={isFetching}
+                            itemClick={handleSelectBattletag}
+                            itemDelete={handleDeleteBattletag}
+                        />
+                        {!isFetching && data?.data &&
+                        <Grid container item xs={12} >
+                            <Pagination
+                                page={page}
+                                count={data.pages}
+                                color={"primary"}
+                                onChange={(_, page) => handlePageChange(page)}
+                                onError={(e) => console.log(e)}
+                                size={"large"}
+                            />
+                        </Grid>
+                        }
+                    </Card>
+                </Grid>
+                {/* <Grid minHeight={400} item xs={12} sm={8} lg={6} xl={4}>
                     <BattletagList
                         battletags={data?.data}
                         loading={isFetching}
@@ -71,7 +93,7 @@ const Profile: FC<IProfile> = () => {
                             />
                         </Grid>
                     }
-                </Grid>
+                </Grid> */}
             </Grid>
         </ViewProvider>
     );

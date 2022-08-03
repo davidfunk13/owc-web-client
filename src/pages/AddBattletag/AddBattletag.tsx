@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Grid, Pagination} from "@mui/material";
+import { Box, Card, Grid, Pagination } from "@mui/material";
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSaveBattletagMutation, useSearchBattletagsQuery } from "../../services/battletagApi";
@@ -48,25 +48,27 @@ const AddBattletag: FC<IAddBattletag> = () => {
     return (
         <ViewProvider heading={"Add Battletag"} breadcrumbs={breadcrumbs}>
             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <BattletagSearchForm onSubmit={submitSearch} loading={isFetching} />
+                <Grid item xs={4}>
+                    <Card elevation={0} variant={"outlined"} component={Box} p={2}>
+                        <BattletagSearchForm onSubmit={submitSearch} loading={isFetching} />
+                    </Card>
                 </Grid>
-                <Grid minHeight={400} item xs={12}>
-                    <Grid item xs={12} sm={8} lg={6} xl={4}>
-                        <BattletagList loading={isFetching} battletags={data?.data} itemClick={handleSaveBattletag} />
-                        {!isFetching && !!data?.data.length &&
-                        <Grid container item xs={12} >
-                            <Pagination
-                                page={page}
-                                count={data.pages}
-                                color={"primary"}
-                                onChange={(_, page) => handlePageChange(page)}
-                                onError={(e) => console.log(e)}
-                                size={"large"}
-                            />
-                        </Grid>
-                        }
+            </Grid>
+            <Grid container spacing={2} >
+                <Grid item xs={12} sm={8} lg={6} xl={4}>
+                    <BattletagList loading={isFetching} battletags={data?.data} itemClick={handleSaveBattletag} />
+                    {!isFetching && !!data?.data.length &&
+                    <Grid container item xs={12} >
+                        <Pagination
+                            page={page}
+                            count={data.pages}
+                            color={"primary"}
+                            onChange={(_, page) => handlePageChange(page)}
+                            onError={(e) => console.log(e)}
+                            size={"large"}
+                        />
                     </Grid>
+                    }
                 </Grid>
             </Grid>
         </ViewProvider>
